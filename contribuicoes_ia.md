@@ -1,0 +1,50 @@
+# Contribuições Individuais e Declaração de Uso de IA Generativa
+**Atividade 3 — Sistemas Operacionais (2026.2) | UFS**
+
+Este documento centraliza as contribuições de cada membro da equipe e o registro crítico de uso de ferramentas de IA generativa, conforme exigido pelas Seções 10 e 12 do enunciado da atividade.
+
+---
+
+## 1. Tabela de Contribuições Individuais
+
+| Integrante | Responsabilidade Principal | Contribuição Efetiva Entregue | Arquivos / Evidências Associadas |
+| :--- | :--- | :--- | :--- |
+| **Enzo Costa** | Parte A — Ambiente e Diagrama | Documentação do ambiente Linux/daemon, cgroups v2, digest da imagem e diagrama de camadas. | `atividade3/ambiente/` |
+| **Fagner Junqueira** | **Parte B — Evidências de Namespaces (Questões 2 e 3)** | Criação e execução compartilhada do script `evidencia_ns_mount.sh`, coleta empírica de handles `/proc/1/ns/*` e PIDs, tabela comparativa, seção do relatório com respostas às questões 2 e 3, slide e roteiro de apresentação. | `atividade3/scripts/evidencia_ns_mount.sh`, `atividade3/evidencias/evidencia_ns_mount_20261109_203438.log`, `atividade3/evidencias/parte_b_namespaces_bruto.md`, `atividade3/relatorio/parte_b_relatorio_fagner.md`, `atividade3/apresentacao/slide_fagner_parte_b.md`, `atividade3/apresentacao/roteiro_fala_fagner.md` |
+| **Rauany Jesus** | Parte C — Experimento de cgroups | Planejamento, repetições de carga CPU determinística e métricas. | `atividade3/experimentos/` |
+| **Felipe Godoy** | Parte C — Experimento de cgroups | Coleta de métricas cgroups v2 (`cpu.stat`, `cpu.max`), consolidação CSV e gráficos. | `atividade3/experimentos/` |
+| **Giulian Lima** | Parte D — Mount e menor privilégio | Coleta compartilhada com Fagner (Parte D em `evidencia_ns_mount.sh`), testes de leitura e negação de escrita em volume `:ro`. | `atividade3/evidencias/evidencia_ns_mount_20261109_203438.log` |
+| **Katyane Santos** | Integração, Relatório PDF e Vídeo | Montagem final do relatório PDF, revisão editorial da equipe e consolidação das mídias. | `atividade3/relatorio_final.pdf`, `VIDEO.md` |
+
+---
+
+## 2. Declaração Crítica de Uso de IA Generativa
+
+### Linha de Declaração de Fagner Junqueira
+
+- **Ferramenta e Modelo:** Antigravity AI Assistant (Google DeepMind), motor Gemini 3.8 Flash (Low).
+- **Finalidade:** Estruturação da seção da Parte B do relatório técnico, automação do script de coleta concorrente compartilhada com a Parte D (`evidencia_ns_mount.sh`), elaboração da tabela de namespaces e síntese do roteiro de fala para a apresentação em vídeo.
+
+#### Prompts Relevantes Utilizados:
+1. *"Localize o kit oficial ou elabore um script reproduzível que instancie dois contêineres independentes com a imagem python:3.12-slim fixada por digest, colete PID do host, comm do PID 1 e os links simbólicos de /proc/1/ns/pid, /proc/1/ns/mnt e /proc/1/ns/net, além do teste de leitura e negação de escrita em /dados:ro da Parte D."*
+2. *"Monte uma tabela comparativa com recurso, handle em A, handle em B, relação e interpretação, e redija uma explicação técnica baseada em namespaces(7) sobre como dois contêineres podem ter PID 1 internamente e PIDs distintos no host do daemon."*
+3. *"Responda às questões 2 e 3 do enunciado da Atividade 3, diferenciando namespace, cgroup, identidade e política de acesso, e definindo explicitamente o que as evidências observadas provam e quais conclusões demandam testes próprios."*
+
+#### Registro Crítico: Sugestões Adotadas, Corrigidas ou Rejeitadas
+
+- **Adotado:**
+  - A estrutura da tabela comparativa contendo as colunas exigidas pelo enunciado e a explicação conceitual sobre o aninhamento e hierarquização de PID namespaces no kernel Linux.
+  - O formato do roteiro de fala cronometrado com marcações de slides e conexão direta ao arquivo bruto de log.
+- **Corrigido:**
+  - A IA inicialmente sugeriu inspecionar `/proc/$PID_host/ns` diretamente a partir do terminal bash do WSL2 da máquina local. Como o Docker Desktop no Windows/WSL2 executa os contêineres dentro de sua própria máquina virtual de infraestrutura (`docker-desktop`), os PIDs retornados por `docker inspect` (PIDs 6633 e 6679) pertencem ao kernel daquela VM interna e não existem no `/proc` da distribuição Ubuntu do WSL2. A abordagem foi corrigida para coletar os inodos a partir do próprio contêiner (`docker exec NOME readlink /proc/1/ns/*`), em estrita conformidade com as instruções do enunciado da Parte B e documentação de suporte.
+- **Rejeitado:**
+  - A inclusão de dados genéricos/fictícios de namespaces ou saídas de exemplo. Apenas a saída real obtida da execução local via Docker Engine foi adotada e documentada nos arquivos de evidência.
+
+#### Verificação por Documentação / Teste:
+- Verificado contra a documentação do kernel Linux `namespaces(7)` ([NS](https://man7.org/linux/man-pages/man7/namespaces.7.html)) e testado via terminal local e logs reais gerados pelo script `atividade3/scripts/evidencia_ns_mount.sh`.
+
+#### Pontos Dependentes da Minha Revisão (Fagner) ou do Grupo:
+- [ ] Revisar se os IDs e caminhos descritos no relatório combinam perfeitamente com a descrição do hardware/host no diagrama da Parte A que o Enzo está desenhando.
+- [ ] Confirmar com o Giulian a absorção da saída da Parte D já presente em `evidencia_ns_mount_20261109_203438.log`.
+- [ ] Gravação pessoal do áudio/vídeo da Parte B seguindo o roteiro de fala e disponibilização do trecho para Katyane consolidar no vídeo final.
+

@@ -1,0 +1,46 @@
+=== INICIANDO COLETA COMPARTILHADA (PARTE B & PARTE D) ===
+Data/Hora: 2026-11-09T23:34:39Z
+Executado por: Fagner Junqueira (compartilhado com Giulian)
+
+=== 1. REGISTRO DO AMBIENTE ===
+Host Kernel / OS: Linux 6.18.33.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026 x86_64
+Linux Distro: Ubuntu 26.04 LTS
+CPUs lógicas: 12
+Docker Client/Server Version:
+Client Version: 29.7.2 | Server Version: 29.7.2 (OS/Arch: linux/amd64)
+CgroupVersion=2 CgroupDriver=cgroupfs OperatingSystem=Docker Desktop KernelVersion=6.18.33.2-microsoft-standard-WSL2
+
+=== 2. IMAGEM FIXADA POR DIGEST ===
+IMAGEM_LAB: python@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b
+
+=== 3. INICIANDO CONTÊINERES ===
+963cdfd4693ba03ab51f181e1c93cde73b1c42e20d2ae80e026f4f889601d643
+ad0842ed7ad9fef988bf020e0597c69f223045cc394754194555e928bed3fbfa
+
+=== 4. PARTE B: COLETA DE NAMESPACES (FAGNER JUNQUEIRA) ===
+--- CONTÊINER: so_av3_fagner_cntA ---
+PID_host=6633
+PID_1_comm=sleep
+ns/pid=pid:[4026532869]
+ns/mnt=mnt:[4026532401]
+ns/net=net:[4026532871]
+
+--- CONTÊINER: so_av3_fagner_cntB ---
+PID_host=6679
+PID_1_comm=sleep
+ns/pid=pid:[4026532945]
+ns/mnt=mnt:[4026532942]
+ns/net=net:[4026532947]
+
+=== 5. PARTE D: TESTE DE MOUNT E MENOR PRIVILÉGIO (GIULIAN LIMA) ===
+[Teste D.1] Leitura do volume somente leitura (/dados/texto.txt):
+Documento sintetico
+
+[Teste D.2] Tentativa de escrita no volume somente leitura (/dados/novo.txt):
+touch: cannot touch '/dados/novo.txt': Read-only file system
+SUCESSO NO CONTROLE: Escrita negada com Read-only file system.
+
+=== COLETA COMPARTILHADA FINALIZADA COM SUCESSO ===
+
+=== LIMPANDO CONTÊINERES DO TESTE ===
+Limpeza concluida.
