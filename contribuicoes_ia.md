@@ -14,7 +14,8 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
 | **Rauany Jesus** | Parte C — Experimento de cgroups | Planejamento, repetições de carga CPU determinística e métricas. | `atividade3/experimentos/` |
 | **Filipe de Carvalho Godoy** | **Parte C — Confirmação dos limites e métricas de cgroup (Questão 4)** | Verificação de que `cpu.max`, `memory.max` e `pids.max` foram aplicados pelo kernel nas seis execuções, por leitura do cgroup e não pela flag; consolidação dos deltas de `cpu.stat` e das três métricas de memória (RSS, `memory.current`, `memory.peak`); identificação e documentação da contaminação do coletor; seção do relatório com resposta à questão 4. | `scripts/verifica_limites.py`, `evidencias/limites_cgroup.csv`, `relatorio/parte_c_limites_filipe.md` |
 | **Giulian Lima** | Parte D — Mount e menor privilégio | Coleta compartilhada com Fagner (Parte D em `evidencia_ns_mount.sh`), testes de leitura e negação de escrita em volume `:ro`. | `atividade3/evidencias/evidencia_ns_mount_20261109_203438.log` |
-| **Katyane Santos** | Integração, Relatório PDF e Vídeo | Montagem final do relatório PDF, revisão editorial da equipe e consolidação das mídias. | `atividade3/relatorio_final.pdf`, `VIDEO.md` |
+| **Vênisson Cardoso dos Santos** | Parte C — Experimento de cgroups, em coautoria com Katyane dos Santos | Coautoria do experimento; execução local do lote `20261110T144547Z_2382` e disponibilização dos registros, CSV, gráficos e relatório. | `scripts/parte_c_venisson/`, `evidencias/parte_c_venisson/`, `relatorio/parte_c_experimentos_venisson.md` |
+| **Katyane dos Santos** | Parte C — Coautoria do experimento de cgroups; Integração, Relatório PDF e Vídeo | Coautoria do experimento com Vênisson Cardoso dos Santos; montagem final do relatório PDF, revisão editorial da equipe e consolidação das mídias. | `scripts/parte_c_venisson/`, `evidencias/parte_c_venisson/`, `relatorio/parte_c_experimentos_venisson.md`, `atividade3/relatorio_final.pdf`, `VIDEO.md` |
 
 ---
 
@@ -71,10 +72,12 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
 - [ ] Os JSONs das seis execuções precisam estar no repositório para o comando de reprodução funcionar. Caminho assumido: `evidencias/cgroups_lote1/`.
 - [ ] A limitação da seção 5.6 é insumo para a questão 5 (ameaça à validade), da Rauany.
 
-## Atualização da parte de Vênisson — 10/11/2026
+## Atualização da parte de Vênisson e Katyane — 10/11/2026
 
-Por solicitação de Vênisson, o relatório de Fagner foi usado como referência, sem presumir a configuração não publicada de Enzo. A assistência de IA preparou cópias do executor com a imagem `python@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b`, executou seis repetições alternadas no WSL2, validou JSON/checksum/limites e gerou CSV, gráficos e o relatório de Vênisson. A carga e o coletor permaneceram idênticos byte a byte.
+Autoria do experimento: Vênisson Cardoso dos Santos e Katyane dos Santos.
 
-Lote publicado: `20261110T144547Z_2382`. Mesma imagem e plataforma não significam hosts idênticos: versões, CPUs e serviços concorrentes estão documentados. Monitoramento/amostras é tratado como densidade aproximada, sem atribuir causalmente atrasos a um único mecanismo. Os arquivos de evidência antigos da pasta de Vênisson foram substituídos pelos novos, preservando o histórico do Git.
+Por solicitação de Vênisson, o relatório de Fagner foi usado como referência, sem presumir a configuração não publicada de Enzo. A assistência de IA preparou cópias do executor com a imagem `python@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b`, executou seis repetições alternadas no WSL2, validou JSON/checksum/limites e gerou CSV, gráficos e o relatório de Vênisson e Katyane. A carga e o coletor permaneceram idênticos byte a byte.
 
-Esta publicação altera somente a parte de Vênisson e suas evidências. As seções anteriores dos colegas, o relatório de Filipe, sua tabela `evidencias/limites_cgroup.csv` e o Google Docs não são atualizados por este commit. Os dados antigos mencionados na análise do Filipe precisam de revisão pelo responsável antes de serem relacionados ao novo lote.
+Lote publicado: `20261110T144547Z_2382`. Mesma imagem e plataforma não significam hosts idênticos: versões, CPUs e serviços concorrentes estão documentados. Monitoramento/amostras é tratado como densidade aproximada, sem atribuir causalmente atrasos a um único mecanismo. Os arquivos de evidência antigos da pasta do experimento de Vênisson e Katyane foram substituídos pelos novos, preservando o histórico do Git.
+
+Esta publicação altera somente a parte de Vênisson e Katyane e suas evidências. As seções anteriores dos colegas, o relatório de Filipe, sua tabela `evidencias/limites_cgroup.csv` e o Google Docs não são atualizados por este commit. Os dados antigos mencionados na análise do Filipe precisam de revisão pelo responsável antes de serem relacionados ao novo lote.

@@ -1,6 +1,8 @@
 # Parte C — Execuções com referência na Parte B (Fagner)
 
-Responsável pelas execuções: Vênisson Cardoso dos Santos. Atualização em 10/11/2026.
+Autoria do experimento: Vênisson Cardoso dos Santos e Katyane dos Santos.
+
+Execução neste computador: Vênisson Cardoso dos Santos. Atualização em 10/11/2026.
 
 ## Protocolo e substituição
 

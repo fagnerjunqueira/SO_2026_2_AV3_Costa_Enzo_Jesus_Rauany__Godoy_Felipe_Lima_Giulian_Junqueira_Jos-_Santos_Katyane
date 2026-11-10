@@ -20,14 +20,16 @@ Repositório da equipe para a Atividade 3.
 
 ## Parte C — lote vigente (10/11/2026)
 
+Autoria do experimento: **Vênisson Cardoso dos Santos e Katyane dos Santos**.
+
 O lote `20261110T144547Z_2382` substitui o lote VirtualBox e o primeiro teste WSL2 na análise principal. Adota a mesma imagem por digest da Parte B de Fagner, com Docker Desktop/WSL2 e cgroups v2/cgroupfs. A padronização é parcial: versões do kernel/Engine, distribuição, CPUs e hardware diferem da referência; isso está documentado nos relatórios. O ambiente do Enzo não foi publicado e não é presumido como idêntico.
 
 - Execução: `scripts/parte_c_venisson/run_experimentos.sh` (sem sudo, digest fixado).
 - Brutos: `evidencias/parte_c_venisson/resultados/20261110T144547Z_2382/`.
 - Consolidação e validação: `evidencias/parte_c_venisson/` (inclui `resultados_consolidados.csv`, `resumo_mediana.csv` e `validacao_execucoes.csv`).
 - Relatório atualizado: `relatorio/parte_c_experimentos_venisson.md`.
-- Relatório compartilhado: https://docs.google.com/document/d/1MaZRUQI5yHYMexa8F3mkOm6dmpE4qBVHiCkkYb2SuyQ/edit?tab=t.0 . O documento compartilhado foi preservado; a análise do novo lote está no relatório de Vênisson nesta branch.
+- Relatório compartilhado: https://docs.google.com/document/d/1MaZRUQI5yHYMexa8F3mkOm6dmpE4qBVHiCkkYb2SuyQ/edit?tab=t.0 . O documento compartilhado foi preservado; a análise do novo lote está no relatório de Vênisson e Katyane nesta branch.
 
 Os resultados anteriores foram retirados dos arquivos vigentes; continuam auditáveis no commit `8f47ee56cc49394418865cb2ffb286e807c6415c` e em cópias locais arquivadas. Não houve reescrita do histórico do Git.
 
-Esta atualização publica somente a parte de Vênisson. O relatório de Filipe e `evidencias/limites_cgroup.csv` permanecem como estavam e descrevem o lote anterior; a adaptação desses materiais ao novo lote fica a cargo do responsável.
+Esta atualização publica somente a parte de Vênisson e Katyane. O relatório de Filipe e `evidencias/limites_cgroup.csv` permanecem como estavam e descrevem o lote anterior; a adaptação desses materiais ao novo lote fica a cargo do responsável.
