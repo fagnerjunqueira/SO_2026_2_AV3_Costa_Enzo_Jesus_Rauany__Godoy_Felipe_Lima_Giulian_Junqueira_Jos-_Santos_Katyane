@@ -76,7 +76,7 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
 
 - **Ferramenta e Modelo:** Claude e ChatGPT.
 - **Finalidade:** Auxílio na análise e interpretação dos resultados das execuções da Parte C, realização de cálculos comparativos entre as condições C1 e C2, organização dos dados em tabelas e elaboração dos textos dos slides e do roteiro de apresentação.
-- 
+  
 #### Registro Crítico: Sugestões Adotadas, Corrigidas ou Rejeitadas
 
 - **Adotado:**
@@ -85,7 +85,7 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
 - **Corrigido:**
   - Os resultados foram organizados considerando as informações efetivamente fornecidas nos arquivos JSON e nos registros de C2, mantendo a distinção entre tempo de parede (wall time) e tempo de CPU do processo. Também foi ajustada a interpretação dos resultados.
 - **Rejeitado:**
-- Os dados permitem descrever o comportamento observado nas seis execuções, mas não sustentam uma conclusão definitiva sobre o desempenho em outros cenários ou em aplicações reais de inferência.
+  - Os dados permitem descrever o comportamento observado nas seis execuções, mas não sustentam uma conclusão definitiva sobre o desempenho em outros cenários ou em aplicações reais de inferência.
   
 ## Atualização da parte de Vênisson e Katyane — 10/11/2026
 
