@@ -9,7 +9,7 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
 
 | Integrante | Responsabilidade Principal | Contribuição Efetiva Entregue | Arquivos / Evidências Associadas |
 | :--- | :--- | :--- | :--- |
-| **Enzo Costa** | Parte A — Ambiente e Diagrama | Documentação do ambiente Linux/daemon, cgroups v2, digest da imagem e diagrama de camadas. | `atividade3/ambiente/` |
+| **Enzo Emanuel Maia Costa** | Parte A — Ambiente e Diagrama | Executou independentemente, conforme seu relato, os comandos de ambiente e Docker da Parte A e informou que os resultados coincidiram com a execução de conferência; definiu e revisou o escopo da seção, do diagrama e do slide com assistência de IA; identificou a necessidade de registrar a divergência entre ambientes das partes. | `evidencias/parte_a_ambiente_enzo.md`, `relatorio/parte_a_ambiente_enzo.md`, `apresentacao/slide_enzo_parte_a.md`, Google Docs do relatório da equipe |
 | **Fagner Junqueira** | **Parte B — Evidências de Namespaces (Questões 2 e 3)** | Criação e execução compartilhada do script `evidencia_ns_mount.sh`, coleta empírica de handles `/proc/1/ns/*` e PIDs, tabela comparativa, seção do relatório com respostas às questões 2 e 3, slide e roteiro de apresentação. | `atividade3/scripts/evidencia_ns_mount.sh`, `atividade3/evidencias/evidencia_ns_mount_20261109_203438.log`, `atividade3/evidencias/parte_b_namespaces_bruto.md`, `atividade3/relatorio/parte_b_relatorio_fagner.md`, `atividade3/apresentacao/slide_fagner_parte_b.md`, `atividade3/apresentacao/roteiro_fala_fagner.md` |
 | **Rauany Jesus** | Parte C — Experimento de cgroups | Planejamento, repetições de carga CPU determinística e métricas. | `atividade3/experimentos/` |
 | **Filipe de Carvalho Godoy** | **Parte C — Confirmação dos limites e métricas de cgroup (Questão 4)** | Verificação de que `cpu.max`, `memory.max` e `pids.max` foram aplicados pelo kernel nas seis execuções, por leitura do cgroup e não pela flag; consolidação dos deltas de `cpu.stat` e das três métricas de memória (RSS, `memory.current`, `memory.peak`); identificação e documentação da contaminação do coletor; seção do relatório com resposta à questão 4. | `scripts/verifica_limites.py`, `evidencias/limites_cgroup.csv`, `relatorio/parte_c_limites_filipe.md` |
@@ -19,6 +19,26 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
 ---
 
 ## 2. Declaração Crítica de Uso de IA Generativa
+
+### Linha de Declaração de Enzo Costa
+
+- **Ferramenta e Modelo:** Assistente de IA integrado ao Copilot SDK no VS Code; o modelo não foi informado nesta sessão.
+- **Finalidade:** Ajudar a conferir os comandos da Parte A em relação à execução independente relatada por Enzo; redigir e organizar sua seção do relatório, o diagrama de camadas e o slide; e inserir a seção no Google Docs do relatório a pedido de Enzo.
+
+#### Prompts Relevantes Utilizados (até três):
+1. *"Rodar os comandos da Parte A: uname -a, os-release, nproc, docker version, docker info (cgroup v1/v2 e driver), pull e digest da imagem (IMAGEM_LAB). Dizer qual é o ambiente real do daemon: nativo, VM, WSL2 ou Docker Desktop. Desenhar o diagrama de camadas (hardware/host, VM se houver, kernel Linux, contêineres). Responder à questão 1: onde está o kernel compartilhado e se há VM intermediária."*
+2. *"Veja o que os meninos fizeram até agora e faça minha parte do relatório com base neles."*
+3. *"Preencha no Google Docs a seção da Parte A logo abaixo do título e do meu nome."*
+
+#### Registro Crítico: Sugestões Adotadas, Corrigidas ou Rejeitadas
+
+- **Adotado:** o diagrama separa Windows host, backend WSL2/kernel Linux, distribuição Ubuntu usada como shell e daemon Docker Desktop; a resposta distingue o kernel dos contêineres do kernel Windows. Também foi incluída a resposta direta sobre a VM intermediária e os dados de cgroups e digest solicitados.
+- **Corrigido:** a primeira tentativa de consultar o Docker ocorreu com o daemon parado. O Docker Desktop foi iniciado; depois, Enzo informa que executou os comandos independentemente e obteve os mesmos resultados da conferência feita pelo assistente.
+- **Corrigido:** ao comparar os textos das Partes B, C e D com a coleta da Parte A, foram identificadas diferenças de sistema, versão do Docker, kernel e driver cgroup. A divergência foi registrada como ressalva, em vez de afirmar que todas as medições vieram do mesmo ambiente.
+- **Rejeitado:** não foram inventadas medições nem omitida a divergência entre os ambientes. A execução do assistente foi registrada como conferência, não como substituta da execução independente relatada por Enzo.
+
+#### Verificação por Execução
+- Enzo relata ter executado independentemente os comandos da Parte A e obtido resultados coincidentes com a conferência do assistente no Windows/WSL2 e no daemon Docker local; o digest também foi confirmado por `docker image inspect`. O assistente auxiliou na redação e organização dos arquivos da Parte A e inseriu o texto no Google Docs da equipe a pedido de Enzo. Enzo deve revisar o texto final e confirmar que a integração está de acordo com o grupo.
 
 ### Linha de Declaração de Fagner Junqueira
 
