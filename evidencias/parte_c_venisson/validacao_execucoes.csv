@@ -1,0 +1,7 @@
+﻿arquivo,ordem,json_valido,limites_validos,iteracoes,checksum,exit_code,timeout,stderr_vazio,deltas_validos,sha256
+C1_R1.json,1,True,True,20000000,4864000,0,False,True,True,b3e6f1173ea70952f604baa117aad86a0b44ba5e5baccd4a9d6db53f62032e8e
+C2_R1.json,2,True,True,20000000,4864000,0,False,True,True,73ca5c8db74befe4e42bd0b45ffdf8f7340e1b393667b071c6f537e9690c6800
+C1_R2.json,3,True,True,20000000,4864000,0,False,True,True,89d7cb7a935f5709b18802ab38407745745c3a3d5e2ddb96491e0ab6102b0bc8
+C2_R2.json,4,True,True,20000000,4864000,0,False,True,True,3c521ff66cbd27baab38f1496cc2db96f48d5f51f763e5be35911e90d0074177
+C1_R3.json,5,True,True,20000000,4864000,0,False,True,True,8241898bc1135bb801d0057c8a2555541c7d84cce6e4cf6180e13fc83ad373f8
+C2_R3.json,6,True,True,20000000,4864000,0,False,True,True,e56f053874fa966cff2e92c2e51b2ad31ac17929cb4507c78d5894b7eb2983d2

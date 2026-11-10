@@ -1,0 +1,4 @@
+# Preserve os bytes das evidências e scripts publicados da Parte C de Vênisson.
+evidencias/parte_c_venisson/** -text whitespace=cr-at-eol
+scripts/parte_c_venisson/** -text whitespace=cr-at-eol
+relatorio/parte_c_experimentos_venisson.md -text whitespace=cr-at-eol

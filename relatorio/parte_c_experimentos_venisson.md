@@ -1,342 +1,95 @@
-\# Atividade 3 — Sistemas Operacionais
+# Parte C — Execuções com referência na Parte B (Fagner)
 
-\## Parte C — Controle de recursos com cgroups v2
+Responsável pelas execuções: Vênisson Cardoso dos Santos. Atualização em 10/11/2026.
 
+## Protocolo e substituição
 
+As seis repetições foram reexecutadas por Vênisson Cardoso dos Santos em 10/11/2026, no lote 20261110T144547Z_2382, na ordem C1/R1, C2/R1, C1/R2, C2/R2, C1/R3, C2/R3. Cada carga realizou 20.000.000 de iterações; a consolidação usa scripts/verifica_limites.py. Este lote substitui os resultados anteriores da Parte C na análise principal; os lotes de VirtualBox e o primeiro lote WSL2 foram arquivados como substituídos.
 
-\*\*Equipe:\*\* Gemma  
+Ambiente medido: Docker Desktop 4.99.0, Engine 29.9.3, Ubuntu 24.04.5 LTS/WSL2, kernel 6.18.54.1-microsoft-standard-WSL2, cgroups v2/cgroupfs, 16 CPUs lógicas e 3.734 GiB no Engine.
 
-\*\*Ambiente:\*\* Ubuntu 24.04.5 LTS em máquina virtual Oracle VirtualBox  
+A referência é a metodologia da Parte B do relatório compartilhado e o log evidencia_ns_mount_20261109_203438.log. A padronização é parcial: mesma imagem por digest, arquitetura linux/amd64, Docker Desktop/WSL2, cgroups v2 e driver cgroupfs. Fagner registrou Desktop 4.87.0, Engine 29.7.2, Ubuntu 26.04, kernel 6.18.33.2 e 12 CPUs. As versões e o hardware locais não foram alterados para imitar esse host; sua RAM não foi registrada na referência. Não se afirma identidade de ambientes nem normalização ao ambiente não publicado do Enzo.
 
-\*\*Tecnologia:\*\* Docker Engine com cgroups v2  
+Os quatro contêineres clinicaescola permaneceram ativos antes e depois das medições; outros aplicativos do usuário não foram encerrados. Não é um ensaio em host ocioso. Os limites da Parte C foram mantidos: 0,5/1 CPU, 256 MiB, sem swap adicional, 64 PIDs, rede desativada e três repetições por condição. A carga e o coletor mantiveram seus bytes; o executor mudou somente o digest e a remoção de sudo.
 
-\*\*Data das execuções originais:\*\* 7 de novembro de 2026
+Imagem: `python@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b`. Python 3.12.16 no contêiner, confirmado no diagnóstico. O digest de índice da referência seleciona uma imagem linux/amd64; a inspeção salva registra também o ID concreto. O coletor original consulta `cpu.max`, `memory.max` e `pids.max`; um diagnóstico separado confirma `memory.swap.max=0`.
 
+## Resultados do novo lote
 
+O trabalho foi idêntico: 20.000.000 de iterações, checksum 4.864.000, status de sucesso, código zero, sem timeout ou stderr nas seis execuções. A mediana de CPU do cgroup foi 2,001 s em C1 e 2,115 s em C2. Essa CPU pertence ao conjunto coletor mais carga.
 
-\## 1. Objetivo
+A mediana do wall interno da carga foi 3,821 s em C1 e 2,137 s em C2; a mediana de monitoramento foi 3,986 s e 2,324 s, respectivamente (razão C1/C2 de 1,715). A comparação é descritiva, com apenas três repetições por condição.
 
+| Execução | CPU cgroup (s) | Janela nominal (s) | Períodos | Throttled | % | Throttling (s) |
+| --- | --- | --- | --- | --- | --- | --- |
+| C1_R1 | 2,168 | 4,40 | 44 | 44 | 100,0% | 1,849 |
+| C1_R2 | 1,990 | 4,00 | 40 | 40 | 100,0% | 1,691 |
+| C1_R3 | 2,001 | 4,00 | 40 | 40 | 100,0% | 1,724 |
+| C2_R1 | 2,125 | 2,40 | 24 | 0 | 0,0% | 0,000 |
+| C2_R2 | 2,115 | 2,30 | 23 | 0 | 0,0% | 0,000 |
+| C2_R3 | 2,084 | 2,30 | 23 | 0 | 0,0% | 0,000 |
 
+O novo lote apresentou throttling em C1 (100,0% a 100,0%) e em C2 (0,0% a 0,0%). Esses percentuais descrevem os períodos contabilizados neste lote; não devem ser interpretados como percentuais do tempo de execução.
 
-Avaliar o funcionamento dos mecanismos de controle de recursos do Linux por meio de cgroups v2, comparando o comportamento de uma carga computacional executada em contêineres Docker com diferentes quotas de CPU.
+![Duração do monitoramento](../evidencias/parte_c_venisson/graficos/01_monitoramento.png)
 
+![Consumo de CPU](../evidencias/parte_c_venisson/graficos/02_consumo_cpu.png)
 
+![Throttling](../evidencias/parte_c_venisson/graficos/03_throttling.png)
 
-O experimento também verifica a aplicação dos limites de memória e de quantidade de processos.
+## Memória e amostragem
 
+| Execução | RSS do processo | memory.current (fim) | memory.peak | Teto | % do teto |
+| --- | --- | --- | --- | --- | --- |
+| C1_R1 | 15,84 MiB | 15,61 MiB | 25,03 MiB | 256 MiB | 9,8% |
+| C1_R2 | 15,69 MiB | 12,61 MiB | 22,37 MiB | 256 MiB | 8,7% |
+| C1_R3 | 15,66 MiB | 13,17 MiB | 22,61 MiB | 256 MiB | 8,8% |
+| C2_R1 | 15,81 MiB | 12,61 MiB | 22,01 MiB | 256 MiB | 8,6% |
+| C2_R2 | 15,76 MiB | 15,72 MiB | 25,38 MiB | 256 MiB | 9,9% |
+| C2_R3 | 15,75 MiB | 12,89 MiB | 22,28 MiB | 256 MiB | 8,7% |
 
+O maior memory.peak foi 25,38 MiB (9,9% do teto). Os valores estão abaixo de 256 MiB, mas não demonstram comportamento sob pressão de memória ou OOM. pids.max=64 foi confirmado, sem teste de saturação.
 
-\## 2. Ambiente experimental
+| Execução | % períodos throttled | Amostras | Monitoramento/amostras | Razão para 50 ms |
+| --- | --- | --- | --- | --- |
+| C1_R1 | 100,0% | 82 | 0,054 s | 1,1× |
+| C1_R2 | 100,0% | 76 | 0,052 s | 1,0× |
+| C1_R3 | 100,0% | 75 | 0,053 s | 1,1× |
+| C2_R1 | 0,0% | 45 | 0,052 s | 1,0× |
+| C2_R2 | 0,0% | 44 | 0,053 s | 1,1× |
+| C2_R3 | 0,0% | 44 | 0,052 s | 1,0× |
 
+A razão monitoramento/amostras variou de 0,052 s a 0,054 s. É um indicador aproximado de densidade de amostragem: não há timestamps individuais para medir intervalos reais ou jitter. Não se deve atribuir causalmente qualquer atraso ao throttling só por essa razão.
 
+## Questão 4 e limites de interpretação
 
-Os experimentos foram realizados em uma máquina virtual Ubuntu, configurada com dois processadores virtuais e aproximadamente 3,8 GiB de memória RAM.
+A quota foi confirmada pelas leituras `50000 100000` e `100000 100000` nos seis JSON, correspondendo a 0,5 e 1 CPU por período de 100 ms. `memory.max=268435456` e `pids.max=64` também conferiram. O novo lote apresentou throttling em C1 (100,0% a 100,0%) e em C2 (0,0% a 0,0%). Esses percentuais descrevem os períodos contabilizados neste lote; não devem ser interpretados como percentuais do tempo de execução.
 
+O coletor continua no mesmo cgroup da carga, lendo RSS nominalmente a cada 50 ms. Portanto, compartilha a quota, acrescenta custo de CPU e pode sofrer atrasos de escalonamento. memory.peak, memory.current e RSS têm escopos distintos. O pico do cgroup não permite localizar o instante do máximo nem atribuí-lo a um único processo.
 
+Os lotes antigos com discrepâncias entre relógios foram retirados da análise principal. Não se reutilizam aqui suas hipóteses de causa, valores de soft lockup ou conclusões de degradação. O novo lote tem seus próprios registros; a troca de imagem, sistema, versão e cargas concorrentes impede atribuir diferenças entre lotes exclusivamente à virtualização.
 
-Foi utilizado o Docker Engine 29.1.3, com o controlador cgroups v2.
+Uma instrumentação futura pode observar o cgroup por fora e registrar timestamps por amostra; isso exigiria outro protocolo e novo lote. Nesta execução, o coletor original foi mantido para preservar a definição da carga e a comparabilidade entre C1 e C2. Os JSON brutos e os hashes ficam em evidencias/parte_c_venisson; as tabelas desta seção usam apenas o novo lote.
 
+## Fontes e trilha de evidências
 
+- Referência documental: [Metodologia da Parte B no relatório compartilhado](https://docs.google.com/document/d/1MaZRUQI5yHYMexa8F3mkOm6dmpE4qBVHiCkkYb2SuyQ/edit?tab=t.0). O Google Docs foi preservado; os resultados deste novo lote estão neste arquivo.
+- Referência do GitHub: [relatório de Fagner](parte_b_relatorio_fagner.md) e [log da Parte B](../evidencias/evidencia_ns_mount_20261109_203438.log), disponíveis no commit base `8f47ee56cc49394418865cb2ffb286e807c6415c`.
+- [JSON brutos e manifesto](../evidencias/parte_c_venisson/resultados/20261110T144547Z_2382/): seis execuções, stderr, digest e iterações.
+- [Log da execução](../evidencias/parte_c_venisson/execucao.log): ordem e códigos de saída.
+- [Ambiente](../evidencias/parte_c_venisson/ambiente/): Engine, imagem, Ubuntu, kernel, serviços concorrentes, diagnóstico e datas UTC.
+- [CSV consolidado](../evidencias/parte_c_venisson/resultados_consolidados.csv), [medianas](../evidencias/parte_c_venisson/resumo_mediana.csv) e [validação](../evidencias/parte_c_venisson/validacao_execucoes.csv): gerados exclusivamente dos seis novos JSON.
+- [SHA256SUMS](../evidencias/parte_c_venisson/SHA256SUMS.txt): hashes relativos à raiz do repositório, cobrindo evidências, carga, coletor, executor e este relatório. O checksum da carga foi conferido independentemente pela soma dos quadrados módulo 1.000.000.007.
 
-Para garantir consistência, as execuções utilizaram a mesma imagem Python, identificada por seu digest SHA-256.
+Os JSON, gráficos e o pacote compactado do lote anterior foram retirados da pasta de evidências vigente. O histórico de commits mantém o registro da substituição. O relatório e a tabela do Filipe não foram modificados nesta atualização e ainda descrevem o lote anterior; não devem ser usados como análise deste novo lote.
 
+## Reprodução
 
+No Ubuntu integrado ao Docker Desktop, a partir da raiz do repositório:
 
-\## 3. Configurações experimentais
+```bash
+bash scripts/parte_c_venisson/run_experimentos.sh
+python3 scripts/verifica_limites.py evidencias/parte_c_venisson/resultados/20261110T144547Z_2382 --csv consolidacao_verificacao.csv
+```
 
-
-
-Foram definidas duas condições:
-
-
-
-| Parâmetro | C1 | C2 |
-
-|---|---|---|
-
-| Quota de CPU | 0,5 CPU | 1 CPU |
-
-| `cpu.max` | `50000 100000` | `100000 100000` |
-
-| Memória RAM | 256 MiB | 256 MiB |
-
-| Limite de processos | 64 | 64 |
-
-| Repetições | 3 | 3 |
-
-
-
-Ambas as condições utilizaram a configuração Docker `--memory=256m --memory-swap=256m`.
-
-
-
-Em verificação complementar, `memory.swap.max` apresentou valor zero, indicando ausência de capacidade adicional de swap no contêiner de diagnóstico. Esse parâmetro não foi armazenado nos resultados originais.
-
-
-
-\## 4. Metodologia
-
-
-
-Foi desenvolvido um programa Python responsável pela execução de uma carga determinística composta por 20 milhões de iterações.
-
-
-
-O programa calculou um checksum e registrou métricas internas de duração e tempo de CPU.
-
-
-
-Um coletor independente acompanhou a execução do subprocesso e registrou:
-
-
-
-\- Duração do monitoramento;
-
-\- Consumo de CPU do cgroup;
-
-\- Quantidade de períodos de controle e de throttling;
-
-\- Tempo de throttling contabilizado pelo kernel;
-
-\- Utilização de memória e RSS;
-
-\- Limites efetivos dos controladores;
-
-\- Código de saída, timeout e resultado funcional.
-
-
-
-Foram realizadas três repetições de C1 e três de C2, alternando as condições.
-
-
-
-Os seis arquivos JSON originais foram preservados para permitir auditoria dos resultados.
-
-
-
-\## 5. Validação funcional
-
-
-
-Todas as seis execuções apresentaram:
-
-
-
-\- 20.000.000 de iterações;
-
-\- Checksum igual a 4.864.000;
-
-\- Status de sucesso;
-
-\- Código de saída zero;
-
-\- Ausência de timeout;
-
-\- Arquivos externos de erro vazios.
-
-
-
-Assim, não foram identificadas falhas funcionais nas execuções registradas.
-
-
-
-\## 6. Resultados experimentais
-
-
-
-\### 6.1. Duração do monitoramento
-
-
-
-| Execução | C1 — 0,5 CPU | C2 — 1 CPU |
-
-|---|---:|---:|
-
-| R1 | 10,607014 s | 4,708670 s |
-
-| R2 | 11,911186 s | 7,777698 s |
-
-| R3 | 10,254488 s | 7,036787 s |
-
-| \*\*Mediana\*\* | \*\*10,607014 s\*\* | \*\*7,036787 s\*\* |
-
-
-
-A duração mediana do monitoramento foi aproximadamente 50,7% maior em C1.
-
-
-
-Esse resultado é compatível com o comportamento esperado para uma condição com quota de CPU mais restritiva.
-
-
-
-Entretanto, o tempo de monitoramento inclui atividades do coletor e não representa exclusivamente a duração computacional da carga.
-
-
-
-\### 6.2. Consumo de CPU contabilizado pelo cgroup
-
-
-
-| Execução | C1 — 0,5 CPU | C2 — 1 CPU |
-
-|---|---:|---:|
-
-| R1 | 3,570837 s | 4,940140 s |
-
-| R2 | 4,058353 s | 3,940385 s |
-
-| R3 | 3,699788 s | 3,754950 s |
-
-
-
-Os valores representam o consumo de CPU registrado pelo controlador do kernel.
-
-
-
-Essa métrica não corresponde ao tempo decorrido de execução. Por isso, não deve ser utilizada isoladamente para calcular diferenças de desempenho entre C1 e C2.
-
-
-
-\### 6.3. Períodos com throttling
-
-
-
-| Execução | C1 — 0,5 CPU | C2 — 1 CPU |
-
-|---|---:|---:|
-
-| R1 | 105 | 27 |
-
-| R2 | 119 | 75 |
-
-| R3 | 104 | 70 |
-
-| \*\*Total\*\* | \*\*328\*\* | \*\*172\*\* |
-
-
-
-C1 apresentou mais períodos com throttling nas três repetições correspondentes.
-
-
-
-Esse comportamento é compatível com a aplicação de uma quota de CPU mais restritiva.
-
-
-
-Os valores acumulados de `throttled\_usec` foram preservados nos resultados originais, mas não foram interpretados como segundos adicionais de execução da carga.
-
-
-
-\### 6.4. Utilização de memória
-
-
-
-Os valores máximos de memória contabilizados pelo cgroup permaneceram entre aproximadamente 21,48 e 21,75 MiB.
-
-
-
-O maior pico observado foi de aproximadamente 21,75 MiB, abaixo do limite configurado de 256 MiB.
-
-
-
-O RSS máximo observado do subprocesso variou entre 16.000 e 16.264 KB.
-
-
-
-Esses dados indicam que o experimento não se aproximou do limite de memória durante as execuções registradas.
-
-
-
-O parâmetro `pids.max` foi confirmado como 64 nos seis resultados, mas o experimento não demonstrou saturação desse limite.
-
-
-
-\## 7. Limitações das medições
-
-
-
-Durante a análise, foram identificadas diferenças importantes entre os tempos internos registrados pela carga e a duração observada pelo coletor.
-
-
-
-Na condição C1, a mediana do tempo interno foi de 3,514819 segundos, enquanto a mediana da duração do monitoramento foi de 10,607014 segundos.
-
-
-
-Além disso, algumas medições internas apresentaram valores de tempo de CPU próximos ao tempo decorrido, incompatíveis com o comportamento sustentado esperado para uma quota de 0,5 CPU.
-
-
-
-Foram realizados testes complementares para investigar essas discrepâncias.
-
-
-
-Em testes controlados, a quota de 0,5 CPU apresentou comportamento coerente com o esperado. Entretanto, a investigação não determinou a causa definitiva das inconsistências registradas no lote original.
-
-
-
-Também foram identificados eventos de soft lockup na máquina virtual durante a investigação posterior. Não há evidência suficiente para atribuir a esses eventos a causa das discrepâncias originais.
-
-
-
-Consequentemente, os resultados não permitem calcular com segurança uma diferença exata de desempenho computacional entre C1 e C2 com base nos tempos internos.
-
-
-
-\## 8. Conclusão
-
-
-
-O experimento confirmou a aplicação dos limites configurados para CPU, memória e processos por meio dos controladores de cgroups v2.
-
-
-
-As seis execuções produziram resultados funcionais consistentes, sem falhas registradas.
-
-
-
-A condição C1 apresentou maior duração de monitoramento e maior quantidade de períodos com throttling do que C2, em concordância qualitativa com o efeito esperado de uma restrição de CPU mais severa.
-
-
-
-Contudo, as inconsistências nas medições de tempo exigem cautela na interpretação quantitativa do desempenho.
-
-
-
-Os resultados demonstram a importância de utilizar conjuntamente métricas da aplicação, medições externas e contadores do kernel na avaliação experimental de mecanismos de controle de recursos.
-
-
-
-\## 9. Arquivos e evidências
-
-
-
-Os seguintes materiais acompanham a documentação:
-
-
-
-\- `carga\_cpu.py`: implementação da carga determinística.
-
-\- `coleta\_cgroups.py`: coleta das métricas do experimento.
-
-\- `run\_experimentos.sh`: automatização das seis execuções.
-
-\- `resultados/20261107T184710Z\_6139/`: resultados originais.
-
-\- `resultados\_consolidados.csv`: tabela consolidada.
-
-\- `graficos/01\_monitoramento.png`: duração do monitoramento.
-
-\- `graficos/02\_consumo\_cpu.png`: consumo de CPU.
-
-\- `graficos/03\_throttling.png`: períodos com throttling.
-
-\- `resultados\_lote1\_original.tar.gz`: cópia compactada dos resultados originais.
-
-\- `SHA256SUMS.txt`: hashes de integridade dos arquivos anteriormente registrados.
-
-
-
-Os arquivos originais foram mantidos sem alterações durante a etapa de consolidação e análise.
-
+O executor cria uma pasta própria para cada novo lote em `scripts/parte_c_venisson/resultados/`. O caminho acima aponta para o lote publicado; ao repetir a execução, use o diretório novo mostrado pelo executor. Esta atualização é destinada à branch `feature/parte-c-venisson` e não altera a branch principal.

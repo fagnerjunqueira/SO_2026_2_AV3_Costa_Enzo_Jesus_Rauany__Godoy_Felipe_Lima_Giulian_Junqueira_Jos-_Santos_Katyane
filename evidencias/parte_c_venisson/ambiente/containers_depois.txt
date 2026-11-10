@@ -1,0 +1,4 @@
+clinicaescola-agenda-slots-scheduler clinicaescola-backend:latest Up 11 minutes
+clinicaescola-backend clinicaescola-backend:latest Up 12 minutes (healthy)
+clinicaescola-frontend clinicaescola-frontend:latest Up 12 minutes
+clinicaescola-db mysql:8.4.7 Up 12 minutes (healthy)

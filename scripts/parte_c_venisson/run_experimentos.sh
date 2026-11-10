@@ -5,7 +5,7 @@ set -u
 BASE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 RESULTADOS="$BASE/resultados"
 
-IMAGEM="python@sha256:4840d514c583a4d3d8cad3940e68dee6f0f6f3635c12fcd0a3d74c21a5b93a54"
+IMAGEM="python@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b"
 
 ITERACOES=20000000
 
@@ -41,7 +41,7 @@ for i in "${!CONDICOES[@]}"; do
     # Preserva stdout e stderr, inclusive em caso de falha.
     if command -v timeout >/dev/null 2>&1; then
         timeout --signal=TERM --kill-after=5s 90s \
-          sudo docker run --rm \
+          docker run --rm \
           --network none \
           --cpus="$CPU" \
           --memory="256m" \
@@ -54,7 +54,7 @@ for i in "${!CONDICOES[@]}"; do
           > "$ARQUIVO" 2> "$ERRO"
         STATUS=$?
     else
-        sudo docker run --rm \
+        docker run --rm \
           --network none \
           --cpus="$CPU" \
           --memory="256m" \
