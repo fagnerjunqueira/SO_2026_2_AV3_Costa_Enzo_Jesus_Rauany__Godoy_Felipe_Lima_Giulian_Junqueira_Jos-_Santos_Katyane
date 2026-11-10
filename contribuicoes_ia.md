@@ -72,6 +72,21 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
 - [ ] Os JSONs das seis execuções precisam estar no repositório para o comando de reprodução funcionar. Caminho assumido: `evidencias/cgroups_lote1/`.
 - [ ] A limitação da seção 5.6 é insumo para a questão 5 (ameaça à validade), da Rauany.
 
+### Linha de Declaração de Rauany de Jesus
+
+- **Ferramenta e Modelo:** Claude e ChatGPT.
+- **Finalidade:** Auxílio na análise e interpretação dos resultados das execuções da Parte C, realização de cálculos comparativos entre as condições C1 e C2, organização dos dados em tabelas e elaboração dos textos dos slides e do roteiro de apresentação.
+- 
+#### Registro Crítico: Sugestões Adotadas, Corrigidas ou Rejeitadas
+
+- **Adotado:**
+  - O auxílio na organização dos registros das execuções em tabelas comparativas, no cálculo das medianas, amplitudes e taxas de trabalho por segundo, além da estruturação dos resultados para facilitar sua compreensão e apresentação.
+  - Elaboração dos textos dos slides e do roteiro de apresentação,
+- **Corrigido:**
+  - Os resultados foram organizados considerando as informações efetivamente fornecidas nos arquivos JSON e nos registros de C2, mantendo a distinção entre tempo de parede (wall time) e tempo de CPU do processo. Também foi ajustada a interpretação dos resultados.
+- **Rejeitado:**
+- Os dados permitem descrever o comportamento observado nas seis execuções, mas não sustentam uma conclusão definitiva sobre o desempenho em outros cenários ou em aplicações reais de inferência.
+  
 ## Atualização da parte de Vênisson e Katyane — 10/11/2026
 
 Autoria do experimento: Vênisson Cardoso dos Santos e Katyane dos Santos.
