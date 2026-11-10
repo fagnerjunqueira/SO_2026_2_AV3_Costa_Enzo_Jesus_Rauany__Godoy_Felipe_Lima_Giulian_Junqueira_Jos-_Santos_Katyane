@@ -12,7 +12,7 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
 | **Enzo Costa** | Parte A — Ambiente e Diagrama | Documentação do ambiente Linux/daemon, cgroups v2, digest da imagem e diagrama de camadas. | `atividade3/ambiente/` |
 | **Fagner Junqueira** | **Parte B — Evidências de Namespaces (Questões 2 e 3)** | Criação e execução compartilhada do script `evidencia_ns_mount.sh`, coleta empírica de handles `/proc/1/ns/*` e PIDs, tabela comparativa, seção do relatório com respostas às questões 2 e 3, slide e roteiro de apresentação. | `atividade3/scripts/evidencia_ns_mount.sh`, `atividade3/evidencias/evidencia_ns_mount_20261109_203438.log`, `atividade3/evidencias/parte_b_namespaces_bruto.md`, `atividade3/relatorio/parte_b_relatorio_fagner.md`, `atividade3/apresentacao/slide_fagner_parte_b.md`, `atividade3/apresentacao/roteiro_fala_fagner.md` |
 | **Rauany Jesus** | Parte C — Experimento de cgroups | Planejamento, repetições de carga CPU determinística e métricas. | `atividade3/experimentos/` |
-| **Felipe Godoy** | Parte C — Experimento de cgroups | Coleta de métricas cgroups v2 (`cpu.stat`, `cpu.max`), consolidação CSV e gráficos. | `atividade3/experimentos/` |
+| **Filipe de Carvalho Godoy** | **Parte C — Confirmação dos limites e métricas de cgroup (Questão 4)** | Verificação de que `cpu.max`, `memory.max` e `pids.max` foram aplicados pelo kernel nas seis execuções, por leitura do cgroup e não pela flag; consolidação dos deltas de `cpu.stat` e das três métricas de memória (RSS, `memory.current`, `memory.peak`); identificação e documentação da contaminação do coletor; seção do relatório com resposta à questão 4. | `scripts/verifica_limites.py`, `evidencias/limites_cgroup.csv`, `relatorio/parte_c_limites_filipe.md` |
 | **Giulian Lima** | Parte D — Mount e menor privilégio | Coleta compartilhada com Fagner (Parte D em `evidencia_ns_mount.sh`), testes de leitura e negação de escrita em volume `:ro`. | `atividade3/evidencias/evidencia_ns_mount_20261109_203438.log` |
 | **Katyane Santos** | Integração, Relatório PDF e Vídeo | Montagem final do relatório PDF, revisão editorial da equipe e consolidação das mídias. | `atividade3/relatorio_final.pdf`, `VIDEO.md` |
 
@@ -48,3 +48,25 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
 - [ ] Confirmar com o Giulian a absorção da saída da Parte D já presente em `evidencia_ns_mount_20261109_203438.log`.
 - [ ] Gravação pessoal do áudio/vídeo da Parte B seguindo o roteiro de fala e disponibilização do trecho para Katyane consolidar no vídeo final.
 
+### Linha de Declaração de Filipe de Carvalho Godoy
+
+- **Ferramenta e Modelo:** Claude (Anthropic), modelo Claude Opus 5.
+- **Finalidade:** Análise dos registros brutos das seis execuções da Parte C, construção do script de verificação dos limites e redação da seção do relatório.
+
+#### Prompts Relevantes Utilizados:
+1. *"Os tempos de C1 e C2 ficaram praticamente iguais, e C2 (1,0 CPU) também apresenta throttling apesar de a carga ser single-thread. Isso é esperado?"*
+2. *"Monte um script que leia os JSONs e confirme cpu.max, memory.max e pids.max, separando RSS, memory.current e memory.peak como métricas distintas, conforme o enunciado exige."*
+
+#### Registro Crítico: Sugestões Adotadas, Corrigidas ou Rejeitadas
+
+- **Adotado:** a distinção entre a flag `--cpus` (solicitação ao runtime) e a leitura de `/sys/fs/cgroup/cpu.max` de dentro do contêiner (estado aplicado pelo kernel), que é o centro da questão 4; e a separação das três métricas de memória em colunas independentes.
+- **Corrigido:** a primeira leitura tratava o throttling de C2 como ruído. Ao cruzar os contadores do kernel com o número de amostras de RSS, verificou-se causa sistemática — o coletor roda no mesmo cgroup da carga e é throttled junto. A evidência é C2_R1: única com throttling moderado (52%) e única em que o intervalo de amostragem correspondeu aos 50 ms programados. Nas outras cinco, o intervalo cresceu de 16 a 47 vezes.
+- **Rejeitado:** atribuir a discrepância entre `wall_time` e `cpu_time` a uma causa única. Com seis amostras e os *soft lockups* registrados na VM, não há base para isso; a divergência foi registrada como anomalia não resolvida. Também foi rejeitada a sugestão de reexecutar o experimento para melhorar os números, já que o enunciado determina preservar tentativas com problemas.
+
+#### Verificação por Documentação / Teste:
+- Semântica de `cpu.max` e `cpu.stat` conferida contra a documentação do kernel ([CG](https://docs.kernel.org/admin-guide/cgroup-v2.html)) e [RES](https://docs.docker.com/engine/containers/resource_constraints/).
+- O script recalcula todas as tabelas da seção a partir dos JSONs originais, de modo que nenhum valor apresentado depende de texto gerado.
+
+#### Pontos Dependentes da Minha Revisão (Filipe) ou do Grupo:
+- [ ] Os JSONs das seis execuções precisam estar no repositório para o comando de reprodução funcionar. Caminho assumido: `evidencias/cgroups_lote1/`.
+- [ ] A limitação da seção 5.6 é insumo para a questão 5 (ameaça à validade), da Rauany.
