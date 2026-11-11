@@ -36,7 +36,7 @@ Os registros individuais e o uso crítico de IA estão em [contribuicoes_ia.md](
 
 ## Parte C — Vênisson e Katyane
 
-Os arquivos desta parte estão na [branch `feature/parte-c-venisson`](https://github.com/fagnerjunqueira/SO_2026_2_AV3_Costa_Enzo_Jesus_Rauany__Godoy_Felipe_Lima_Giulian_Junqueira_Jos-_Santos_Katyane/blob/feature/parte-c-venisson), ainda separados da `main`. Esta atualização modifica somente o README e a declaração de contribuições.
+Os arquivos desta parte estão na [branch `feature/parte-c-venisson`](https://github.com/fagnerjunqueira/SO_2026_2_AV3_Costa_Enzo_Jesus_Rauany__Godoy_Felipe_Lima_Giulian_Junqueira_Jos-_Santos_Katyane/tree/feature/parte-c-venisson), ainda separados da `main`. Esta atualização modifica somente o README e a declaração de contribuições.
 
 - [Relatório e metodologia](https://github.com/fagnerjunqueira/SO_2026_2_AV3_Costa_Enzo_Jesus_Rauany__Godoy_Felipe_Lima_Giulian_Junqueira_Jos-_Santos_Katyane/blob/feature/parte-c-venisson/relatorio/parte_c_experimentos_venisson.md).
 - [Dados brutos, inventário, CSV e gráficos](https://github.com/fagnerjunqueira/SO_2026_2_AV3_Costa_Enzo_Jesus_Rauany__Godoy_Felipe_Lima_Giulian_Junqueira_Jos-_Santos_Katyane/tree/feature/parte-c-venisson/evidencias/parte_c_venisson/).
@@ -59,15 +59,93 @@ Os resultados VirtualBox anteriores permanecem no [histórico original](https://
 
 O coletor compartilha a quota da carga e o host manteve serviços concorrentes. Há apenas três repetições por condição. RSS do processo, `memory.current` e `memory.peak` têm escopos diferentes. A razão duração de monitoramento/amostras é aproximada e não mede intervalos individuais nem prova a causa de atrasos.
 
-### Reprodução da Parte C
+## Preparação e versões de referência
 
-Em um checkout da branch da Parte C, com Docker Linux e cgroups v2:
+Executar os comandos em Bash no Linux ou Ubuntu/WSL2, com Git, Python 3, Docker com daemon Linux e cgroups v2. No Windows, iniciar o Docker Desktop e habilitar a integração com a distribuição WSL2. Não executar o roteiro Bash diretamente no PowerShell.
+
+| Material | Referência imutável |
+| --- | --- |
+| Base documental da main antes desta complementação | `bd88856487b7f1ff8af2a8ffdf1c4d4e3fd8be46` |
+| Código e evidências WSL2 da Parte C | `98b62a0f8433a018d918c502a6e12fe7bac80b7b` |
+| Histórico VirtualBox, separado do WSL2 | `8f47ee56cc49394418865cb2ffb286e807c6415c` |
+
+O commit desta complementação está no histórico do README no GitHub. Para registrar o commit exato de qualquer checkout, usar `git rev-parse HEAD`. A main documenta a entrega e referencia a Parte C em sua branch; esta atualização não integra os demais arquivos.
+
+```bash
+git clone https://github.com/fagnerjunqueira/SO_2026_2_AV3_Costa_Enzo_Jesus_Rauany__Godoy_Felipe_Lima_Giulian_Junqueira_Jos-_Santos_Katyane.git gemma-av3
+cd gemma-av3
+git fetch origin
+# Checkout separado e imutável para reproduzir a Parte C.
+git worktree add --detach ../gemma-av3-parte-c 98b62a0f8433a018d918c502a6e12fe7bac80b7b
+cd ../gemma-av3-parte-c
+git rev-parse HEAD
+uname -a
+cat /etc/os-release
+nproc
+free -h
+docker version
+docker compose version
+docker info --format 'Cgroup={{.CgroupVersion}} Driver={{.CgroupDriver}} CPUs={{.NCPU}} MemoriaBytes={{.MemTotal}}'
+```
+
+Registrar separadamente o sistema hospedeiro e o ambiente real do daemon. Em Docker Desktop, o kernel usado pelos contêineres pertence ao backend Linux, não ao Windows. Limitações de controladores e de inspeção dos limites ancestrais devem acompanhar a análise.
+
+### Origem e digest da imagem
+
+Origem: imagem oficial Python no Docker Hub (`docker.io/library/python`). O executor da Parte C usa exatamente:
+
+```bash
+export IMAGEM_LAB='python@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b'
+docker pull "$IMAGEM_LAB"
+docker image inspect --format '{{json .RepoDigests}} {{.Os}}/{{.Architecture}}' "$IMAGEM_LAB"
+```
+
+O lote publicado usa linux/amd64. Não substituir pelo conteúdo atual de uma tag mutável para reproduzir esse lote. O pull requer internet inicialmente; a Parte C executa com `--network none`. Revisar dados pessoais e caminhos antes de publicar saídas completas de inspect/info.
+
+## Reprodução e coleta da Parte C
+
+A partir de `gemma-av3-parte-c`, criado acima:
 
 ```bash
 bash scripts/parte_c_venisson/run_experimentos.sh
 ```
 
-O executor fixa a imagem por digest, alterna C1/C2 e cria um diretório de lote próprio. Preservar stdout, stderr e tentativas com problemas. Os contêineres da Parte C usam `--rm`; evitar limpeza global do Docker.
+O script fixa 20.000.000 de iterações internamente, alterna C1_R1, C2_R1, C1_R2, C2_R2, C1_R3, C2_R3 e não lê `ITERACOES` do ambiente. C1 usa 0,5 CPU e C2 usa 1 CPU. Ambas usam 256 MiB, RAM+swap total de 256 MiB e 64 tarefas. Os timeouts são 60 s no coletor e 90 s no host quando GNU timeout está disponível.
+
+Cada execução cria `scripts/parte_c_venisson/resultados/<LOTE>/`, sem sobrescrever os registros publicados. A pasta contém seis JSON, seis arquivos stderr, `manifesto.csv` com ordem/códigos de saída, `imagem.txt` e `iteracoes.txt`. Preservar inclusive tentativas com falha; não trocar o lote de origem silenciosamente.
+
+Para conferir as evidências já publicadas e gerar outro CSV sem executar Docker:
+
+```bash
+python3 scripts/verifica_limites.py   evidencias/parte_c_venisson/resultados/20261110T144547Z_2382   --csv /tmp/gemma-av3-limites.csv
+sha256sum -c evidencias/parte_c_venisson/SHA256SUMS.txt
+```
+
+Para conferir um lote novo, substituir o diretório de entrada pelo caminho informado ao final do executor. O verificador imprime limites, CPU, memória e validação funcional; o resumo de medianas publicado está em `evidencias/parte_c_venisson/resumo_mediana.csv`.
+
+Cada JSON registra limites, contadores antes/depois, deltas, RSS, memória do grupo, wall/CPU da carga, checksum, status e timeout. Calcular vazão como iterações/wall e comparar mediana e amplitude das três repetições de cada condição. Os campos históricos de intervalo/atraso do verificador representam razão monitoramento/amostras e classificação heurística, sem timestamps individuais ou prova causal.
+
+## Coleta de namespaces e montagem somente leitura
+
+O script `scripts/evidencia_ns_mount.sh` está na main e também na referência da Parte C. Ele consulta a imagem local pela tag `python:3.12-slim`. Em uma repetição, apontar essa tag local para o digest escolhido e registrar o digest efetivamente impresso no log:
+
+```bash
+docker tag "$IMAGEM_LAB" python:3.12-slim
+# O script remove dados_demo e contêineres com estes nomes.
+# Executar apenas em checkout de laboratório, sem dados próprios nesse diretório.
+test ! -e dados_demo
+docker ps -a --filter name=so_av3_fagner_cnt
+# Prosseguir somente se não houver contêineres preexistentes com os nomes do teste.
+bash scripts/evidencia_ns_mount.sh
+```
+
+O log novo fica em `evidencias/evidencia_ns_mount_<DATA_HORA>.log`. Conferir PID do host do daemon, PID 1 interno, handles pid/mnt/net, leitura e negação de escrita. O script identifica Fagner no cabeçalho por texto fixo: registrar o operador real de uma repetição, sem atribuir a coleta nova ao autor original. Essa repetição pode alterar a tag local, mas não muda o digest fixo do executor da Parte C.
+
+## Limpeza do laboratório
+
+A Parte C usa `docker run --rm`. O script de namespaces possui limpeza por trap para os contêineres `so_av3_fagner_cntA` e `so_av3_fagner_cntB` e o diretório sintético `dados_demo` no diretório corrente. Por isso, verificar previamente que esses nomes não pertencem a outros trabalhos.
+
+Preservar JSON, stderr, manifestos, CSV e logs após a limpeza. Se uma interrupção deixar recursos ativos, identificar os contêineres desta execução com `docker ps -a` e remover apenas seus IDs confirmados, usando `docker rm -f ID_DO_CONTAINER_DO_TESTE`. Não executar `docker system prune`, apagar volumes ou encerrar serviços dos demais projetos. A imagem pode permanecer em cache.
 
 ## Materiais finais
 
