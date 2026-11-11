@@ -12,9 +12,12 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
 | **Enzo Costa** | Parte A — Ambiente e Diagrama | Documentação do ambiente Linux/daemon, cgroups v2, digest da imagem e diagrama de camadas. | `atividade3/ambiente/` |
 | **Fagner Junqueira** | **Parte B — Evidências de Namespaces (Questões 2 e 3)** | Criação e execução compartilhada do script `evidencia_ns_mount.sh`, coleta empírica de handles `/proc/1/ns/*` e PIDs, tabela comparativa, seção do relatório com respostas às questões 2 e 3, slide e roteiro de apresentação. | `atividade3/scripts/evidencia_ns_mount.sh`, `atividade3/evidencias/evidencia_ns_mount_20261109_203438.log`, `atividade3/evidencias/parte_b_namespaces_bruto.md`, `atividade3/relatorio/parte_b_relatorio_fagner.md`, `atividade3/apresentacao/slide_fagner_parte_b.md`, `atividade3/apresentacao/roteiro_fala_fagner.md` |
 | **Rauany Jesus** | Parte C — Experimento de cgroups | Planejamento, repetições de carga CPU determinística e métricas. | `atividade3/experimentos/` |
+| **Vênisson** | Parte C — Execução dos experimentos de cgroups | Responsável pelas execuções da carga de CPU nas condições C1 (0,5 CPU) e C2 (1,0 CPU), com três repetições por condição. Evidências e resultados pendentes de conferência. | Arquivos experimentais a confirmar com o integrante. |
 | **Filipe de Carvalho Godoy** | **Parte C — Confirmação dos limites e métricas de cgroup (Questão 4)** | Verificação de que `cpu.max`, `memory.max` e `pids.max` foram aplicados pelo kernel nas seis execuções, por leitura do cgroup e não pela flag; consolidação dos deltas de `cpu.stat` e das três métricas de memória (RSS, `memory.current`, `memory.peak`); identificação e documentação da contaminação do coletor; seção do relatório com resposta à questão 4. | `scripts/verifica_limites.py`, `evidencias/limites_cgroup.csv`, `relatorio/parte_c_limites_filipe.md` |
 | **Giulian Lima** | Parte D — Mount e menor privilégio | Coleta compartilhada com Fagner (Parte D em `evidencia_ns_mount.sh`), testes de leitura e negação de escrita em volume `:ro`. | `atividade3/evidencias/evidencia_ns_mount_20261109_203438.log` |
-| **Katyane Santos** | Integração, Relatório PDF e Vídeo | Montagem final do relatório PDF, revisão editorial da equipe e consolidação das mídias. | `atividade3/relatorio_final.pdf`, `VIDEO.md` |
+
+| **Katyane Santos** | Parte 7 — Consolidação e entrega | Organização e revisão do repositório; atualização do README; criação do checklist; integração dos relatórios das Partes A, B, C e D; consolidação editorial dos resultados experimentais; elaboração do relatório final em Markdown e PDF, com gráficos; organização dos links da apresentação no Canva e do vídeo no Google Drive; revisão da rastreabilidade e das pendências da entrega. | `README.md`, `CHECKLIST_ENTREGA.md`, `contribuicoes_ia.md`, `relatorio/relatorio_final_consolidado.md`, `relatorio/relatorio_final_consolidado.pdf`, `relatorio/parte_c_limites_atualizacao_20261110.md`, `VIDEO.md` |
+
 
 ---
 
@@ -70,3 +73,40 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
 #### Pontos Dependentes da Minha Revisão (Filipe) ou do Grupo:
 - [ ] Os JSONs das seis execuções precisam estar no repositório para o comando de reprodução funcionar. Caminho assumido: `evidencias/cgroups_lote1/`.
 - [ ] A limitação da seção 5.6 é insumo para a questão 5 (ameaça à validade), da Rauany.
+
+
+### Declaração de Uso de IA — Katyane Santos
+
+**Ferramenta:** ChatGPT (OpenAI).
+
+**Finalidade:** Apoio à organização do repositório, documentação dos procedimentos de reprodução e preparação do checklist de entrega da Atividade 3.
+
+#### Prompts relevantes utilizados
+
+1. "Oriente a execução da minha Parte 7 — Consolidação, considerando o repositório já criado pela equipe e minhas responsabilidades no relatório, README e entrega."
+
+2. "Ajude a organizar o README com preparação do ambiente, reprodução dos experimentos, coleta das evidências, limpeza e rastreabilidade, sem inventar resultados."
+
+3. "Confira a estrutura do repositório e ajude a preparar um checklist para identificar materiais concluídos e pendentes de cada integrante."
+
+#### Registro crítico
+
+**Adotado:**
+- Organização do README em seções de preparação, reprodução, coleta, limpeza e rastreabilidade.
+- Criação de um checklist para acompanhar os requisitos da entrega.
+- Identificação de campos pendentes para digest da imagem, commit final e link do vídeo.
+
+**Corrigido:**
+- A documentação inicial mencionava uma pasta `atividade3/`, mas os arquivos existentes estavam organizados diretamente na raiz do repositório. O título do README foi corrigido para refletir a estrutura observada. A decisão sobre reorganizar as pastas permanece pendente de alinhamento com a equipe.
+- As contribuições foram descritas distinguindo atividades já realizadas de entregas ainda em preparação.
+
+**Rejeitado ou não adotado:**
+- Preenchimento de métricas experimentais sem evidências reais.
+- Inclusão de digest, identificador de commit ou link de vídeo ainda não confirmados.
+- Execução de comandos de limpeza indiscriminada que poderiam afetar outros projetos.
+
+#### Verificação
+
+As orientações foram conferidas por inspeção da estrutura do repositório e pelos comandos `git status` e `git diff`. Os procedimentos documentados no README ainda precisam ser validados pela equipe no ambiente experimental.
+
+Nenhuma medição de CPU, memória ou namespaces foi produzida pela IA.

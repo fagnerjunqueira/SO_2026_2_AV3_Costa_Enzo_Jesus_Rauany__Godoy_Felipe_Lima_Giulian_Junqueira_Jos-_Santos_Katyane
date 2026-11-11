@@ -1,0 +1,13 @@
+Executando C1_R1 com quota de 0.5 CPU
+C1_R1 finalizado. Exit code: 0
+Executando C2_R1 com quota de 1.0 CPU
+C2_R1 finalizado. Exit code: 0
+Executando C1_R2 com quota de 0.5 CPU
+C1_R2 finalizado. Exit code: 0
+Executando C2_R2 com quota de 1.0 CPU
+C2_R2 finalizado. Exit code: 0
+Executando C1_R3 com quota de 0.5 CPU
+C1_R3 finalizado. Exit code: 0
+Executando C2_R3 com quota de 1.0 CPU
+C2_R3 finalizado. Exit code: 0
+Registros armazenados em: /mnt/c/Users/Vênisson Cardoso/Documents/Codex/2026-11-10/referenced-chatgpt-conversation-this-is-an/outputs/parte_c_referencia_fagner/scripts/resultados/20261110T144547Z_2382
