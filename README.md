@@ -36,11 +36,11 @@ Os registros individuais e o uso crítico de IA estão em [contribuicoes_ia.md](
 
 ## Parte C — Vênisson e Katyane
 
-Os arquivos desta parte estão na [branch `feature/parte-c-venisson`](https://github.com/fagnerjunqueira/SO_2026_2_AV3_Costa_Enzo_Jesus_Rauany__Godoy_Felipe_Lima_Giulian_Junqueira_Jos-_Santos_Katyane/tree/feature/parte-c-venisson), ainda separados da `main`. Esta atualização modifica somente o README e a declaração de contribuições.
+Os scripts, registros, CSV, gráficos e relatório da Parte C estão integrados à `main`. As estatísticas abaixo usam somente o lote WSL2 vigente; o lote VirtualBox permanece identificado no histórico.
 
-- [Relatório e metodologia](https://github.com/fagnerjunqueira/SO_2026_2_AV3_Costa_Enzo_Jesus_Rauany__Godoy_Felipe_Lima_Giulian_Junqueira_Jos-_Santos_Katyane/blob/feature/parte-c-venisson/relatorio/parte_c_experimentos_venisson.md).
-- [Dados brutos, inventário, CSV e gráficos](https://github.com/fagnerjunqueira/SO_2026_2_AV3_Costa_Enzo_Jesus_Rauany__Godoy_Felipe_Lima_Giulian_Junqueira_Jos-_Santos_Katyane/tree/feature/parte-c-venisson/evidencias/parte_c_venisson/).
-- [Carga, coletor e executor](https://github.com/fagnerjunqueira/SO_2026_2_AV3_Costa_Enzo_Jesus_Rauany__Godoy_Felipe_Lima_Giulian_Junqueira_Jos-_Santos_Katyane/tree/feature/parte-c-venisson/scripts/parte_c_venisson/).
+- [Relatório e metodologia](relatorio/parte_c_experimentos_venisson.md).
+- [Dados brutos, inventário, CSV e gráficos](evidencias/parte_c_venisson/).
+- [Carga, coletor e executor](scripts/parte_c_venisson/).
 
 Lote WSL2 vigente: `20261110T144547Z_2382`. São três repetições por condição, com 20.000.000 de iterações e checksum 4.864.000 em cada execução. Os seis registros terminaram com sucesso.
 
@@ -69,7 +69,7 @@ Executar os comandos em Bash no Linux ou Ubuntu/WSL2, com Git, Python 3, Docker 
 | Código e evidências WSL2 da Parte C | `98b62a0f8433a018d918c502a6e12fe7bac80b7b` |
 | Histórico VirtualBox, separado do WSL2 | `8f47ee56cc49394418865cb2ffb286e807c6415c` |
 
-O commit desta complementação está no histórico do README no GitHub. Para registrar o commit exato de qualquer checkout, usar `git rev-parse HEAD`. A main documenta a entrega e referencia a Parte C em sua branch; esta atualização não integra os demais arquivos.
+A consolidação original de Katyane está no commit `b0f9728`, preservado no histórico da integração. O commit final da entrega corresponde ao commit de integração visível no histórico da `main`. Para registrar o SHA exato de qualquer checkout, usar `git rev-parse HEAD`. As referências imutáveis acima permitem reproduzir os códigos e dados originais.
 
 ```bash
 git clone https://github.com/fagnerjunqueira/SO_2026_2_AV3_Costa_Enzo_Jesus_Rauany__Godoy_Felipe_Lima_Giulian_Junqueira_Jos-_Santos_Katyane.git gemma-av3
@@ -152,4 +152,8 @@ Preservar JSON, stderr, manifestos, CSV e logs após a limpeza. Se uma interrup�
 - [Vídeo da equipe — AT3](https://drive.google.com/file/d/1OREg4M7iMNTn85Jl9wyk5ezy-Nb6A88Z/view?usp=drive_link).
 - [Relatório técnico — Google Docs](https://docs.google.com/document/d/1MaZRUQI5yHYMexa8F3mkOm6dmpE4qBVHiCkkYb2SuyQ/edit?tab=t.0).
 
-O relatório acima é o documento editável da equipe. O PDF consolidado exigido no enunciado ainda precisa ser exportado e disponibilizado na entrega. A confirmação do arquivo de vídeo não substitui a conferência da participação de todos os integrantes. O PPTX atualizado recebido pela equipe ainda requer conferência de consistência com o lote WSL2 vigente.
+O documento Google Docs é uma versão editável da equipe. O [relatório final consolidado em PDF](relatorio/relatorio_final_consolidado.pdf) e sua [fonte Markdown](relatorio/relatorio_final_consolidado.md) estão disponíveis na main. Os links de apresentação e vídeo também constam em [VIDEO.md](VIDEO.md). A confirmação do arquivo de vídeo não substitui a conferência da participação de todos os integrantes. O PPTX atualizado recebido pela equipe ainda requer conferência de consistência com o lote WSL2 vigente.
+
+## Conferência final da integração
+
+O [checklist](CHECKLIST_ENTREGA.md) distingue evidências presentes de validações humanas pendentes. O PDF de consolidação preserva a edição de Katyane. Consulte também a atualização de limites em `relatorio/parte_c_limites_atualizacao_20261110.md`: o relatório original de Filipe descreve o lote anterior, sem substituir as estatísticas WSL2. Os gráficos desta comparação estão em `evidencias/parte_c_venisson/graficos/`.

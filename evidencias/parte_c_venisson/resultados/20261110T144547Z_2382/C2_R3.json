@@ -1,0 +1,66 @@
+{
+  "experimento": "Atividade 3 - Cgroups",
+  "iteracoes": 20000000,
+  "limites": {
+    "cpu_max": "100000 100000",
+    "memory_max": "268435456",
+    "pids_max": "64"
+  },
+  "cpu_stat_antes": {
+    "usage_usec": 253438,
+    "user_usec": 171338,
+    "system_usec": 82099,
+    "nice_usec": 0,
+    "nr_periods": 4,
+    "nr_throttled": 0,
+    "throttled_usec": 0,
+    "nr_bursts": 0,
+    "burst_usec": 0
+  },
+  "cpu_stat_depois": {
+    "usage_usec": 2337283,
+    "user_usec": 2171387,
+    "system_usec": 165895,
+    "nice_usec": 0,
+    "nr_periods": 27,
+    "nr_throttled": 0,
+    "throttled_usec": 0,
+    "nr_bursts": 0,
+    "burst_usec": 0
+  },
+  "deltas_cpu": {
+    "usage_usec_delta": 2083845,
+    "nr_periods_delta": 23,
+    "nr_throttled_delta": 0,
+    "throttled_usec_delta": 0
+  },
+  "memoria_antes": {
+    "memory_current": "13246464",
+    "memory_peak": "13697024"
+  },
+  "memoria_depois": {
+    "memory_current": "13512704",
+    "memory_peak": "23363584"
+  },
+  "rss": {
+    "pid_interno": 7,
+    "rss_max_observado_kb": 16124,
+    "quantidade_amostras": 44,
+    "intervalo_amostragem_s": 0.05
+  },
+  "execucao": {
+    "exit_code": 0,
+    "timeout": false,
+    "tempo_monitoramento_s": 2.309547,
+    "tempo_total_coleta_s": 2.310542,
+    "resultado_carga": {
+      "iteracoes": 20000000,
+      "checksum": 4864000,
+      "wall_time_s": 2.080971,
+      "cpu_time_s": 1.91933,
+      "status": "sucesso"
+    },
+    "stdout_bruto": "{\"iteracoes\": 20000000, \"checksum\": 4864000, \"wall_time_s\": 2.080971, \"cpu_time_s\": 1.91933, \"status\": \"sucesso\"}",
+    "stderr_bruto": ""
+  }
+}

@@ -10,12 +10,12 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
 | Integrante | Responsabilidade Principal | Contribuição Efetiva Entregue | Arquivos / Evidências Associadas |
 | :--- | :--- | :--- | :--- |
 | **Enzo Emanuel Maia Costa** | Parte A — Ambiente e Diagrama | Executou independentemente, conforme seu relato, os comandos de ambiente e Docker da Parte A e informou que os resultados coincidiram com a execução de conferência; definiu e revisou o escopo da seção, do diagrama e do slide com assistência de IA; identificou a necessidade de registrar a divergência entre ambientes das partes. | `evidencias/parte_a_ambiente_enzo.md`, `relatorio/parte_a_ambiente_enzo.md`, `apresentacao/slide_enzo_parte_a.md`, Google Docs do relatório da equipe |
-| **Fagner Junqueira** | **Parte B — Evidências de Namespaces (Questões 2 e 3)** | Criação e execução compartilhada do script `evidencia_ns_mount.sh`, coleta empírica de handles `/proc/1/ns/*` e PIDs, tabela comparativa, seção do relatório com respostas às questões 2 e 3, slide e roteiro de apresentação. | `atividade3/scripts/evidencia_ns_mount.sh`, `atividade3/evidencias/evidencia_ns_mount_20261109_203438.log`, `atividade3/evidencias/parte_b_namespaces_bruto.md`, `atividade3/relatorio/parte_b_relatorio_fagner.md`, `atividade3/apresentacao/slide_fagner_parte_b.md`, `atividade3/apresentacao/roteiro_fala_fagner.md` |
-| **Rauany Jesus** | Parte C — Experimento de cgroups | Planejamento, repetições de carga CPU determinística e métricas. | `atividade3/experimentos/` |
+| **Fagner Junqueira** | **Parte B — Evidências de Namespaces (Questões 2 e 3)** | Criação e execução compartilhada do script `evidencia_ns_mount.sh`, coleta empírica de handles `/proc/1/ns/*` e PIDs, tabela comparativa, seção do relatório com respostas às questões 2 e 3, slide e roteiro de apresentação. | `scripts/evidencia_ns_mount.sh`, `evidencias/evidencia_ns_mount_20261109_203438.log`, `evidencias/parte_b_namespaces_bruto.md`, `relatorio/parte_b_relatorio_fagner.md`, `apresentacao/slide_fagner_parte_b.md`, `apresentacao/roteiro_fala_fagner.md` |
+| **Rauany Jesus** | Parte C — Experimento de cgroups | Planejamento, repetições de carga CPU determinística e métricas. | Análise histórica da Parte C; contribuição ao lote vigente a confirmar pela autora |
 | **Filipe de Carvalho Godoy** | **Parte C — Confirmação dos limites e métricas de cgroup (Questão 4)** | Verificação de que `cpu.max`, `memory.max` e `pids.max` foram aplicados pelo kernel nas seis execuções, por leitura do cgroup e não pela flag; consolidação dos deltas de `cpu.stat` e das três métricas de memória (RSS, `memory.current`, `memory.peak`); identificação e documentação da contaminação do coletor; seção do relatório com resposta à questão 4. | `scripts/verifica_limites.py`, `evidencias/limites_cgroup.csv`, `relatorio/parte_c_limites_filipe.md` |
-| **Giulian Lima** | Parte D — Mount e menor privilégio | Coleta compartilhada com Fagner (Parte D em `evidencia_ns_mount.sh`), testes de leitura e negação de escrita em volume `:ro`. | `atividade3/evidencias/evidencia_ns_mount_20261109_203438.log` |
-| **Vênisson Cardoso dos Santos** | Parte C — Experimento de cgroups em coautoria com Katyane | Execução local do lote WSL2 `20261110T144547Z_2382`, coleta e disponibilização dos registros, CSV, gráficos e relatório. | Branch `feature/parte-c-venisson`: `scripts/parte_c_venisson/`, `evidencias/parte_c_venisson/`, `relatorio/parte_c_experimentos_venisson.md` |
-| **Katyane dos Santos** | Parte C — Coautoria do experimento; integração documental | Coautoria do experimento com Vênisson e preparação documental. PDF e vídeo finais permanecem como responsabilidades previstas, sem entrega comprovada no conjunto auditado. | Materiais compartilhados da Parte C na branch `feature/parte-c-venisson`; PDF e URL do vídeo pendentes |
+| **Giulian Lima** | Parte D — Mount e menor privilégio | Coleta compartilhada com Fagner (Parte D em `evidencia_ns_mount.sh`), testes de leitura e negação de escrita em volume `:ro`. | `evidencias/evidencia_ns_mount_20261109_203438.log` |
+| **Vênisson Cardoso dos Santos** | Parte C — Experimento de cgroups em coautoria com Katyane | Execução local do lote WSL2 `20261110T144547Z_2382`, coleta e disponibilização dos registros, CSV, gráficos e relatório. | `scripts/parte_c_venisson/`, `evidencias/parte_c_venisson/`, `relatorio/parte_c_experimentos_venisson.md` |
+| **Katyane dos Santos** | Parte C — Coautoria do experimento; integração documental | Coautoria do experimento com Vênisson, preparação documental e consolidação editorial dos relatórios em Markdown/PDF, com gráficos, checklist e organização dos links da apresentação e do vídeo. | `relatorio/relatorio_final_consolidado.md`, `relatorio/relatorio_final_consolidado.pdf`, `CHECKLIST_ENTREGA.md`, `VIDEO.md` e materiais compartilhados da Parte C |
 
 ---
 
@@ -62,7 +62,7 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
   - A inclusão de dados genéricos/fictícios de namespaces ou saídas de exemplo. Apenas a saída real obtida da execução local via Docker Engine foi adotada e documentada nos arquivos de evidência.
 
 #### Verificação por Documentação / Teste:
-- Verificado contra a documentação do kernel Linux `namespaces(7)` ([NS](https://man7.org/linux/man-pages/man7/namespaces.7.html)) e testado via terminal local e logs reais gerados pelo script `atividade3/scripts/evidencia_ns_mount.sh`.
+- Verificado contra a documentação do kernel Linux `namespaces(7)` ([NS](https://man7.org/linux/man-pages/man7/namespaces.7.html)) e testado via terminal local e logs reais gerados pelo script `scripts/evidencia_ns_mount.sh`.
 
 #### Pontos Dependentes da Minha Revisão (Fagner) ou do Grupo:
 - [ ] Revisar se os IDs e caminhos descritos no relatório combinam perfeitamente com a descrição do hardware/host no diagrama da Parte A que o Enzo está desenhando.
@@ -102,4 +102,45 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
 - **Rejeitado:** preencher medições ausentes, agregar VirtualBox e WSL2 ou atribuir causa única às anomalias do lote antigo.
 - **Verificação:** seis JSON WSL2, checksum 4.864.000, limites de CPU/memória/PIDs, códigos de saída, deltas dos contadores e estatísticas recalculadas. Nenhuma nova medição nesta revisão documental.
 
-A execução local documentada é de Vênisson; a autoria experimental é compartilhada com Katyane. As estatísticas usam somente o lote WSL2 `20261110T144547Z_2382`, com três repetições por condição. Os dados e o relatório estão na branch `feature/parte-c-venisson`, ainda não incorporada à main por esta atualização. As declarações dos demais integrantes foram preservadas e se referem aos seus próprios registros e contextos.
+A execução local documentada é de Vênisson; a autoria experimental é compartilhada com Katyane. As estatísticas usam somente o lote WSL2 `20261110T144547Z_2382`, com três repetições por condição. Os dados e o relatório foram incorporados à main na integração da consolidação de Katyane. As declarações dos demais integrantes foram preservadas e se referem aos seus próprios registros e contextos.
+
+### Declaração de Uso de IA — Katyane Santos
+
+**Ferramenta:** ChatGPT (OpenAI).
+
+**Finalidade:** Apoio à organização do repositório, documentação dos procedimentos de reprodução e preparação do checklist de entrega da Atividade 3.
+
+#### Prompts relevantes utilizados
+
+1. "Oriente a execução da minha Parte 7 — Consolidação, considerando o repositório já criado pela equipe e minhas responsabilidades no relatório, README e entrega."
+
+2. "Ajude a organizar o README com preparação do ambiente, reprodução dos experimentos, coleta das evidências, limpeza e rastreabilidade, sem inventar resultados."
+
+3. "Confira a estrutura do repositório e ajude a preparar um checklist para identificar materiais concluídos e pendentes de cada integrante."
+
+#### Registro crítico
+
+**Adotado:**
+- Organização do README em seções de preparação, reprodução, coleta, limpeza e rastreabilidade.
+- Criação de um checklist para acompanhar os requisitos da entrega.
+- Identificação de campos pendentes para digest da imagem, commit final e link do vídeo.
+
+**Corrigido:**
+- A documentação inicial mencionava uma pasta `atividade3/`, mas os arquivos existentes estavam organizados diretamente na raiz do repositório. O título do README foi corrigido para refletir a estrutura observada. A decisão sobre reorganizar as pastas permanece pendente de alinhamento com a equipe.
+- As contribuições foram descritas distinguindo atividades já realizadas de entregas ainda em preparação.
+
+**Rejeitado ou não adotado:**
+- Preenchimento de métricas experimentais sem evidências reais.
+- Inclusão de digest, identificador de commit ou link de vídeo ainda não confirmados.
+- Execução de comandos de limpeza indiscriminada que poderiam afetar outros projetos.
+
+#### Verificação
+
+As orientações foram conferidas por inspeção da estrutura do repositório e pelos comandos `git status` e `git diff`. Os procedimentos documentados no README ainda precisam ser validados pela equipe no ambiente experimental.
+
+Nenhuma medição de CPU, memória ou namespaces foi produzida pela IA.
+
+
+### Integração final
+
+ChatGPT/Codex apoiou a resolução dos conflitos de README e contribuições, preservando as declarações individuais e os arquivos da consolidação de Katyane. Scripts e brutos não foram modificados. Os resultados WSL2 foram confrontados com seis JSON, CSV, hashes e relatório. Nenhuma medição nova foi realizada. As verificações ainda pendentes permanecem identificadas no checklist.
