@@ -29,7 +29,7 @@ Repositório da equipe para a Atividade 3.
 | Filipe de Carvalho Godoy | Parte C: verificação dos limites e análise dos contadores |
 | Rauany Ingrid Santos de Jesus | Parte C: análise comparativa de resultados |
 | Vênisson Cardoso dos Santos | Parte C, em coautoria com Katyane: execução local, coleta e organização dos resultados |
-| Katyane dos Santos | Coautoria da Parte C com Vênisson e preparação documental; integração de PDF e vídeo prevista |
+| Katyane dos Santos | Coautoria da Parte C com Vênisson e consolidação editorial do PDF, checklist e links de apresentação/vídeo |
 | Giulian Fábio Bastos Amorim Lima | Parte D: montagem somente leitura e menor privilégio |
 
 Os registros individuais e o uso crítico de IA estão em [contribuicoes_ia.md](contribuicoes_ia.md).
@@ -118,7 +118,7 @@ Para conferir as evidências já publicadas e gerar outro CSV sem executar Docke
 
 ```bash
 python3 scripts/verifica_limites.py   evidencias/parte_c_venisson/resultados/20261110T144547Z_2382   --csv /tmp/gemma-av3-limites.csv
-sha256sum -c SHA256SUMS_INTEGRACAO.txt
+sha256sum -c evidencias/parte_c_venisson/SHA256SUMS.txt
 ```
 
 Para conferir um lote novo, substituir o diretório de entrada pelo caminho informado ao final do executor. O verificador imprime limites, CPU, memória e validação funcional; o resumo de medianas publicado está em `evidencias/parte_c_venisson/resumo_mediana.csv`.
@@ -159,3 +159,5 @@ O documento Google Docs é uma versão editável da equipe. O [relatório final 
 O [checklist](CHECKLIST_ENTREGA.md) distingue evidências presentes de validações humanas pendentes. O PDF de consolidação preserva as oito páginas da edição de Katyane e acrescenta uma página de complemento com vídeo, vazão/amplitude e limites de interpretação. Consulte também a atualização de limites em `relatorio/parte_c_limites_atualizacao_20261110.md`: o relatório original de Filipe descreve o lote anterior, sem substituir as estatísticas WSL2. Os gráficos desta comparação estão em `evidencias/parte_c_venisson/graficos/`.
 
 O manifesto original da Parte C foi preservado. Na cópia da consolidação, sete arquivos sofreram apenas normalização CRLF/LF; `SHA256SUMS_INTEGRACAO.txt` verifica os bytes integrados. Os seis JSON de execução são idênticos aos originais.
+
+Para validar os arquivos da main integrada, executar na raiz do checkout da main: `sha256sum -c SHA256SUMS_INTEGRACAO.txt`. O checkout imutável da Parte C usa o manifesto original, conforme o comando de reprodução acima.
