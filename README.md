@@ -118,7 +118,7 @@ Para conferir as evidências já publicadas e gerar outro CSV sem executar Docke
 
 ```bash
 python3 scripts/verifica_limites.py   evidencias/parte_c_venisson/resultados/20261110T144547Z_2382   --csv /tmp/gemma-av3-limites.csv
-sha256sum -c evidencias/parte_c_venisson/SHA256SUMS.txt
+sha256sum -c SHA256SUMS_INTEGRACAO.txt
 ```
 
 Para conferir um lote novo, substituir o diretório de entrada pelo caminho informado ao final do executor. O verificador imprime limites, CPU, memória e validação funcional; o resumo de medianas publicado está em `evidencias/parte_c_venisson/resumo_mediana.csv`.
@@ -156,4 +156,6 @@ O documento Google Docs é uma versão editável da equipe. O [relatório final 
 
 ## Conferência final da integração
 
-O [checklist](CHECKLIST_ENTREGA.md) distingue evidências presentes de validações humanas pendentes. O PDF de consolidação preserva a edição de Katyane. Consulte também a atualização de limites em `relatorio/parte_c_limites_atualizacao_20261110.md`: o relatório original de Filipe descreve o lote anterior, sem substituir as estatísticas WSL2. Os gráficos desta comparação estão em `evidencias/parte_c_venisson/graficos/`.
+O [checklist](CHECKLIST_ENTREGA.md) distingue evidências presentes de validações humanas pendentes. O PDF de consolidação preserva as oito páginas da edição de Katyane e acrescenta uma página de complemento com vídeo, vazão/amplitude e limites de interpretação. Consulte também a atualização de limites em `relatorio/parte_c_limites_atualizacao_20261110.md`: o relatório original de Filipe descreve o lote anterior, sem substituir as estatísticas WSL2. Os gráficos desta comparação estão em `evidencias/parte_c_venisson/graficos/`.
+
+O manifesto original da Parte C foi preservado. Na cópia da consolidação, sete arquivos sofreram apenas normalização CRLF/LF; `SHA256SUMS_INTEGRACAO.txt` verifica os bytes integrados. Os seis JSON de execução são idênticos aos originais.
