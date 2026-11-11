@@ -250,3 +250,13 @@ As diferenças de ambiente e as verificações de segurança não realizadas del
 - Docker Documentation. *Resource constraints*. https://docs.docker.com/engine/containers/resource_constraints/
 
 **Pendências de validação antes da entrega:** confirmar a contribuição de Rauany, verificar a documentação complementar de menor privilégio de Giulian, revisar a exigência de ambiente único e conferir os dados finais de apresentação e vídeo.
+
+## Complemento da integracao
+
+Autoria experimental da Parte C: Venisson Cardoso dos Santos e Katyane dos Santos; execucao local de Venisson. Vazao mediana C1/C2: 5.234.746 / 9.360.250 iteracoes/s; amplitudes do wall: 0,083601 / 0,084754 s. Sao tres repeticoes por condicao, exclusivamente WSL2.
+
+Video: https://drive.google.com/file/d/1OREg4M7iMNTn85Jl9wyk5ezy-Nb6A88Z/view?usp=drive_link
+
+Apresentacao: https://canva.link/moqubp5sz74mp3v
+
+As pendencias de contribuicao de Rauany, comprovacao completa de menor privilegio, participacao no video e revisao dos slides permanecem humanas. O enunciado nao exige host unico: exige identificar os ambientes e preservar a origem das evidencias. Nenhuma medicao foi refeita nesta integracao.
