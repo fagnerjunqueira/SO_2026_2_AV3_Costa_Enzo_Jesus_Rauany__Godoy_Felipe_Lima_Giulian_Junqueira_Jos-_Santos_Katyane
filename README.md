@@ -149,4 +149,7 @@ Preservar JSON, stderr, manifestos, CSV e logs após a limpeza. Se uma interrup�
 
 ## Materiais finais
 
-O PDF consolidado e a URL final do vídeo não foram localizados no conjunto auditado. Os slides recebidos ainda contêm valores do lote anterior e precisam de revisão antes de representar os resultados WSL2.
+- [Vídeo da equipe — AT3](https://drive.google.com/file/d/1OREg4M7iMNTn85Jl9wyk5ezy-Nb6A88Z/view?usp=drive_link).
+- [Relatório técnico — Google Docs](https://docs.google.com/document/d/1MaZRUQI5yHYMexa8F3mkOm6dmpE4qBVHiCkkYb2SuyQ/edit?tab=t.0).
+
+O relatório acima é o documento editável da equipe. O PDF consolidado exigido no enunciado ainda precisa ser exportado e disponibilizado na entrega. A confirmação do arquivo de vídeo não substitui a conferência da participação de todos os integrantes. O PPTX atualizado recebido pela equipe ainda requer conferência de consistência com o lote WSL2 vigente.
