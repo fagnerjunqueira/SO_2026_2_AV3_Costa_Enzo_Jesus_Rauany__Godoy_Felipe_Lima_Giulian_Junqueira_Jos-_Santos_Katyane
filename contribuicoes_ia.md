@@ -14,7 +14,8 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
 | **Rauany Jesus** | Parte C — Experimento de cgroups | Planejamento, repetições de carga CPU determinística e métricas. | `atividade3/experimentos/` |
 | **Filipe de Carvalho Godoy** | **Parte C — Confirmação dos limites e métricas de cgroup (Questão 4)** | Verificação de que `cpu.max`, `memory.max` e `pids.max` foram aplicados pelo kernel nas seis execuções, por leitura do cgroup e não pela flag; consolidação dos deltas de `cpu.stat` e das três métricas de memória (RSS, `memory.current`, `memory.peak`); identificação e documentação da contaminação do coletor; seção do relatório com resposta à questão 4. | `scripts/verifica_limites.py`, `evidencias/limites_cgroup.csv`, `relatorio/parte_c_limites_filipe.md` |
 | **Giulian Lima** | Parte D — Mount e menor privilégio | Coleta compartilhada com Fagner (Parte D em `evidencia_ns_mount.sh`), testes de leitura e negação de escrita em volume `:ro`. | `atividade3/evidencias/evidencia_ns_mount_20261109_203438.log` |
-| **Katyane Santos** | Integração, Relatório PDF e Vídeo | Montagem final do relatório PDF, revisão editorial da equipe e consolidação das mídias. | `atividade3/relatorio_final.pdf`, `VIDEO.md` |
+| **Vênisson Cardoso dos Santos** | Parte C — Experimento de cgroups em coautoria com Katyane | Execução local do lote WSL2 `20261110T144547Z_2382`, coleta e disponibilização dos registros, CSV, gráficos e relatório. | Branch `feature/parte-c-venisson`: `scripts/parte_c_venisson/`, `evidencias/parte_c_venisson/`, `relatorio/parte_c_experimentos_venisson.md` |
+| **Katyane dos Santos** | Parte C — Coautoria do experimento; integração documental | Coautoria do experimento com Vênisson e preparação documental. PDF e vídeo finais permanecem como responsabilidades previstas, sem entrega comprovada no conjunto auditado. | Materiais compartilhados da Parte C na branch `feature/parte-c-venisson`; PDF e URL do vídeo pendentes |
 
 ---
 
@@ -90,3 +91,15 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
 #### Pontos Dependentes da Minha Revisão (Filipe) ou do Grupo:
 - [ ] Os JSONs das seis execuções precisam estar no repositório para o comando de reprodução funcionar. Caminho assumido: `evidencias/cgroups_lote1/`.
 - [ ] A limitação da seção 5.6 é insumo para a questão 5 (ameaça à validade), da Rauany.
+
+### Declaração de Vênisson e Katyane — Parte C e revisão documental
+
+- **Ferramenta:** ChatGPT/Codex. A identificação exata do modelo não foi exposta no ambiente desta revisão.
+- **Finalidade:** apoio à preparação da carga/coleta, organização de evidências, cálculos, gráficos, redação técnica e revisão de README/contribuições.
+- **Solicitação de revisão:** auditar os resultados, separar VirtualBox de WSL2, reconhecer a coautoria e organizar a documentação no padrão da Atividade 2. O escopo final desta atualização se limita a `README.md` e `contribuicoes_ia.md`.
+- **Adotado:** calcular vazão por iterações/wall interno, distinguir CPU do processo e do cgroup e manter a origem de cada lote.
+- **Corrigido:** tratar monitoramento/amostras como razão aproximada, sem chamar de intervalo real; distinguir responsabilidade prevista de entrega comprovada de PDF/vídeo.
+- **Rejeitado:** preencher medições ausentes, agregar VirtualBox e WSL2 ou atribuir causa única às anomalias do lote antigo.
+- **Verificação:** seis JSON WSL2, checksum 4.864.000, limites de CPU/memória/PIDs, códigos de saída, deltas dos contadores e estatísticas recalculadas. Nenhuma nova medição nesta revisão documental.
+
+A execução local documentada é de Vênisson; a autoria experimental é compartilhada com Katyane. As estatísticas usam somente o lote WSL2 `20261110T144547Z_2382`, com três repetições por condição. Os dados e o relatório estão na branch `feature/parte-c-venisson`, ainda não incorporada à main por esta atualização. As declarações dos demais integrantes foram preservadas e se referem aos seus próprios registros e contextos.
