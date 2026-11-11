@@ -9,19 +9,37 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
 
 | Integrante | Responsabilidade Principal | Contribuição Efetiva Entregue | Arquivos / Evidências Associadas |
 | :--- | :--- | :--- | :--- |
-| **Enzo Costa** | Parte A — Ambiente e Diagrama | Documentação do ambiente Linux/daemon, cgroups v2, digest da imagem e diagrama de camadas. | `atividade3/ambiente/` |
-| **Fagner Junqueira** | **Parte B — Evidências de Namespaces (Questões 2 e 3)** | Criação e execução compartilhada do script `evidencia_ns_mount.sh`, coleta empírica de handles `/proc/1/ns/*` e PIDs, tabela comparativa, seção do relatório com respostas às questões 2 e 3, slide e roteiro de apresentação. | `atividade3/scripts/evidencia_ns_mount.sh`, `atividade3/evidencias/evidencia_ns_mount_20261109_203438.log`, `atividade3/evidencias/parte_b_namespaces_bruto.md`, `atividade3/relatorio/parte_b_relatorio_fagner.md`, `atividade3/apresentacao/slide_fagner_parte_b.md`, `atividade3/apresentacao/roteiro_fala_fagner.md` |
-| **Rauany Jesus** | Parte C — Experimento de cgroups | Planejamento, repetições de carga CPU determinística e métricas. | `atividade3/experimentos/` |
-| **Vênisson** | Parte C — Execução dos experimentos de cgroups | Responsável pelas execuções da carga de CPU nas condições C1 (0,5 CPU) e C2 (1,0 CPU), com três repetições por condição. Evidências e resultados pendentes de conferência. | Arquivos experimentais a confirmar com o integrante. |
+| **Enzo Emanuel Maia Costa** | Parte A — Ambiente e Diagrama | Executou independentemente, conforme seu relato, os comandos de ambiente e Docker da Parte A e informou que os resultados coincidiram com a execução de conferência; definiu e revisou o escopo da seção, do diagrama e do slide com assistência de IA; identificou a necessidade de registrar a divergência entre ambientes das partes. | `evidencias/parte_a_ambiente_enzo.md`, `relatorio/parte_a_ambiente_enzo.md`, `apresentacao/slide_enzo_parte_a.md`, Google Docs do relatório da equipe |
+| **Fagner Junqueira** | **Parte B — Evidências de Namespaces (Questões 2 e 3)** | Criação e execução compartilhada do script `evidencia_ns_mount.sh`, coleta empírica de handles `/proc/1/ns/*` e PIDs, tabela comparativa, seção do relatório com respostas às questões 2 e 3, slide e roteiro de apresentação. | `scripts/evidencia_ns_mount.sh`, `evidencias/evidencia_ns_mount_20261109_203438.log`, `evidencias/parte_b_namespaces_bruto.md`, `relatorio/parte_b_relatorio_fagner.md`, `apresentacao/slide_fagner_parte_b.md`, `apresentacao/roteiro_fala_fagner.md` |
+| **Rauany Jesus** | Parte C — Experimento de cgroups | Planejamento, repetições de carga CPU determinística e métricas. | Análise histórica da Parte C; contribuição ao lote vigente a confirmar pela autora |
 | **Filipe de Carvalho Godoy** | **Parte C — Confirmação dos limites e métricas de cgroup (Questão 4)** | Verificação de que `cpu.max`, `memory.max` e `pids.max` foram aplicados pelo kernel nas seis execuções, por leitura do cgroup e não pela flag; consolidação dos deltas de `cpu.stat` e das três métricas de memória (RSS, `memory.current`, `memory.peak`); identificação e documentação da contaminação do coletor; seção do relatório com resposta à questão 4. | `scripts/verifica_limites.py`, `evidencias/limites_cgroup.csv`, `relatorio/parte_c_limites_filipe.md` |
-| **Giulian Lima** | Parte D — Mount e menor privilégio | Coleta compartilhada com Fagner (Parte D em `evidencia_ns_mount.sh`), testes de leitura e negação de escrita em volume `:ro`. | `atividade3/evidencias/evidencia_ns_mount_20261109_203438.log` |
-
-| **Katyane Santos** | Parte 7 — Consolidação e entrega | Organização e revisão do repositório; atualização do README; criação do checklist; integração dos relatórios das Partes A, B, C e D; consolidação editorial dos resultados experimentais; elaboração do relatório final em Markdown e PDF, com gráficos; organização dos links da apresentação no Canva e do vídeo no Google Drive; revisão da rastreabilidade e das pendências da entrega. | `README.md`, `CHECKLIST_ENTREGA.md`, `contribuicoes_ia.md`, `relatorio/relatorio_final_consolidado.md`, `relatorio/relatorio_final_consolidado.pdf`, `relatorio/parte_c_limites_atualizacao_20261110.md`, `VIDEO.md` |
-
+| **Giulian Lima** | Parte D — Mount e menor privilégio | Coleta compartilhada com Fagner (Parte D em `evidencia_ns_mount.sh`), testes de leitura e negação de escrita em volume `:ro`. | `evidencias/evidencia_ns_mount_20261109_203438.log` |
+| **Vênisson Cardoso dos Santos** | Parte C — Experimento de cgroups em coautoria com Katyane | Execução local do lote WSL2 `20261110T144547Z_2382`, coleta e disponibilização dos registros, CSV, gráficos e relatório. | `scripts/parte_c_venisson/`, `evidencias/parte_c_venisson/`, `relatorio/parte_c_experimentos_venisson.md` |
+| **Katyane dos Santos** | Parte C — Coautoria do experimento; integração documental | Coautoria do experimento com Vênisson, preparação documental e consolidação editorial dos relatórios em Markdown/PDF, com gráficos, checklist e organização dos links da apresentação e do vídeo. | `relatorio/relatorio_final_consolidado.md`, `relatorio/relatorio_final_consolidado.pdf`, `CHECKLIST_ENTREGA.md`, `VIDEO.md` e materiais compartilhados da Parte C |
 
 ---
 
 ## 2. Declaração Crítica de Uso de IA Generativa
+
+### Linha de Declaração de Enzo Costa
+
+- **Ferramenta e Modelo:** Assistente de IA integrado ao Copilot SDK no VS Code; o modelo não foi informado nesta sessão.
+- **Finalidade:** Ajudar a conferir os comandos da Parte A em relação à execução independente relatada por Enzo; redigir e organizar sua seção do relatório, o diagrama de camadas e o slide; e inserir a seção no Google Docs do relatório a pedido de Enzo.
+
+#### Prompts Relevantes Utilizados (até três):
+1. *"Rodar os comandos da Parte A: uname -a, os-release, nproc, docker version, docker info (cgroup v1/v2 e driver), pull e digest da imagem (IMAGEM_LAB). Dizer qual é o ambiente real do daemon: nativo, VM, WSL2 ou Docker Desktop. Desenhar o diagrama de camadas (hardware/host, VM se houver, kernel Linux, contêineres). Responder à questão 1: onde está o kernel compartilhado e se há VM intermediária."*
+2. *"Veja o que os meninos fizeram até agora e faça minha parte do relatório com base neles."*
+3. *"Preencha no Google Docs a seção da Parte A logo abaixo do título e do meu nome."*
+
+#### Registro Crítico: Sugestões Adotadas, Corrigidas ou Rejeitadas
+
+- **Adotado:** o diagrama separa Windows host, backend WSL2/kernel Linux, distribuição Ubuntu usada como shell e daemon Docker Desktop; a resposta distingue o kernel dos contêineres do kernel Windows. Também foi incluída a resposta direta sobre a VM intermediária e os dados de cgroups e digest solicitados.
+- **Corrigido:** a primeira tentativa de consultar o Docker ocorreu com o daemon parado. O Docker Desktop foi iniciado; depois, Enzo informa que executou os comandos independentemente e obteve os mesmos resultados da conferência feita pelo assistente.
+- **Corrigido:** ao comparar os textos das Partes B, C e D com a coleta da Parte A, foram identificadas diferenças de sistema, versão do Docker, kernel e driver cgroup. A divergência foi registrada como ressalva, em vez de afirmar que todas as medições vieram do mesmo ambiente.
+- **Rejeitado:** não foram inventadas medições nem omitida a divergência entre os ambientes. A execução do assistente foi registrada como conferência, não como substituta da execução independente relatada por Enzo.
+
+#### Verificação por Execução
+- Enzo relata ter executado independentemente os comandos da Parte A e obtido resultados coincidentes com a conferência do assistente no Windows/WSL2 e no daemon Docker local; o digest também foi confirmado por `docker image inspect`. O assistente auxiliou na redação e organização dos arquivos da Parte A e inseriu o texto no Google Docs da equipe a pedido de Enzo. Enzo deve revisar o texto final e confirmar que a integração está de acordo com o grupo.
 
 ### Linha de Declaração de Fagner Junqueira
 
@@ -44,7 +62,7 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
   - A inclusão de dados genéricos/fictícios de namespaces ou saídas de exemplo. Apenas a saída real obtida da execução local via Docker Engine foi adotada e documentada nos arquivos de evidência.
 
 #### Verificação por Documentação / Teste:
-- Verificado contra a documentação do kernel Linux `namespaces(7)` ([NS](https://man7.org/linux/man-pages/man7/namespaces.7.html)) e testado via terminal local e logs reais gerados pelo script `atividade3/scripts/evidencia_ns_mount.sh`.
+- Verificado contra a documentação do kernel Linux `namespaces(7)` ([NS](https://man7.org/linux/man-pages/man7/namespaces.7.html)) e testado via terminal local e logs reais gerados pelo script `scripts/evidencia_ns_mount.sh`.
 
 #### Pontos Dependentes da Minha Revisão (Fagner) ou do Grupo:
 - [ ] Revisar se os IDs e caminhos descritos no relatório combinam perfeitamente com a descrição do hardware/host no diagrama da Parte A que o Enzo está desenhando.
@@ -74,6 +92,17 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
 - [ ] Os JSONs das seis execuções precisam estar no repositório para o comando de reprodução funcionar. Caminho assumido: `evidencias/cgroups_lote1/`.
 - [ ] A limitação da seção 5.6 é insumo para a questão 5 (ameaça à validade), da Rauany.
 
+### Declaração de Vênisson e Katyane — Parte C e revisão documental
+
+- **Ferramenta:** ChatGPT/Codex. A identificação exata do modelo não foi exposta no ambiente desta revisão.
+- **Finalidade:** apoio à preparação da carga/coleta, organização de evidências, cálculos, gráficos, redação técnica e revisão de README/contribuições.
+- **Solicitação de revisão:** auditar os resultados, separar VirtualBox de WSL2, reconhecer a coautoria e organizar a documentação no padrão da Atividade 2. O escopo final desta atualização se limita a `README.md` e `contribuicoes_ia.md`.
+- **Adotado:** calcular vazão por iterações/wall interno, distinguir CPU do processo e do cgroup e manter a origem de cada lote.
+- **Corrigido:** tratar monitoramento/amostras como razão aproximada, sem chamar de intervalo real; distinguir responsabilidade prevista de entrega comprovada de PDF/vídeo.
+- **Rejeitado:** preencher medições ausentes, agregar VirtualBox e WSL2 ou atribuir causa única às anomalias do lote antigo.
+- **Verificação:** seis JSON WSL2, checksum 4.864.000, limites de CPU/memória/PIDs, códigos de saída, deltas dos contadores e estatísticas recalculadas. Nenhuma nova medição nesta revisão documental.
+
+A execução local documentada é de Vênisson; a autoria experimental é compartilhada com Katyane. As estatísticas usam somente o lote WSL2 `20261110T144547Z_2382`, com três repetições por condição. Os dados e o relatório foram incorporados à main na integração da consolidação de Katyane. As declarações dos demais integrantes foram preservadas e se referem aos seus próprios registros e contextos.
 
 ### Declaração de Uso de IA — Katyane Santos
 
@@ -110,3 +139,8 @@ Este documento centraliza as contribuições de cada membro da equipe e o regist
 As orientações foram conferidas por inspeção da estrutura do repositório e pelos comandos `git status` e `git diff`. Os procedimentos documentados no README ainda precisam ser validados pela equipe no ambiente experimental.
 
 Nenhuma medição de CPU, memória ou namespaces foi produzida pela IA.
+
+
+### Integração final
+
+ChatGPT/Codex apoiou a resolução dos conflitos de README e contribuições, preservando as declarações individuais e os arquivos da consolidação de Katyane. Scripts e brutos não foram modificados. Os resultados WSL2 foram confrontados com seis JSON, CSV, hashes e relatório. Nenhuma medição nova foi realizada. As verificações ainda pendentes permanecem identificadas no checklist.
